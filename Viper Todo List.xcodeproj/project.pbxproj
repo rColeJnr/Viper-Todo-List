@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		75EE130E2C7D9C6F001BA9F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE130D2C7D9C6F001BA9F1 /* AppDelegate.swift */; };
 		75EE13102C7D9C6F001BA9F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE130F2C7D9C6F001BA9F1 /* SceneDelegate.swift */; };
-		75EE13122C7D9C6F001BA9F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE13112C7D9C6F001BA9F1 /* ViewController.swift */; };
-		75EE13152C7D9C6F001BA9F1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75EE13142C7D9C6F001BA9F1 /* Base */; };
 		75EE13172C7D9C70001BA9F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75EE13162C7D9C70001BA9F1 /* Assets.xcassets */; };
 		75EE131A2C7D9C70001BA9F1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75EE13192C7D9C70001BA9F1 /* Base */; };
 /* End PBXBuildFile section */
@@ -19,8 +17,6 @@
 		75EE130A2C7D9C6F001BA9F1 /* Viper Todo List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Viper Todo List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75EE130D2C7D9C6F001BA9F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75EE130F2C7D9C6F001BA9F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		75EE13112C7D9C6F001BA9F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		75EE13142C7D9C6F001BA9F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		75EE13162C7D9C70001BA9F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75EE13192C7D9C70001BA9F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75EE131B2C7D9C70001BA9F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,8 +54,6 @@
 			children = (
 				75EE130D2C7D9C6F001BA9F1 /* AppDelegate.swift */,
 				75EE130F2C7D9C6F001BA9F1 /* SceneDelegate.swift */,
-				75EE13112C7D9C6F001BA9F1 /* ViewController.swift */,
-				75EE13132C7D9C6F001BA9F1 /* Main.storyboard */,
 				75EE13162C7D9C70001BA9F1 /* Assets.xcassets */,
 				75EE13182C7D9C70001BA9F1 /* LaunchScreen.storyboard */,
 				75EE131B2C7D9C70001BA9F1 /* Info.plist */,
@@ -127,7 +121,6 @@
 			files = (
 				75EE13172C7D9C70001BA9F1 /* Assets.xcassets in Resources */,
 				75EE131A2C7D9C70001BA9F1 /* Base in Resources */,
-				75EE13152C7D9C6F001BA9F1 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +131,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75EE13122C7D9C6F001BA9F1 /* ViewController.swift in Sources */,
 				75EE130E2C7D9C6F001BA9F1 /* AppDelegate.swift in Sources */,
 				75EE13102C7D9C6F001BA9F1 /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +139,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		75EE13132C7D9C6F001BA9F1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				75EE13142C7D9C6F001BA9F1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		75EE13182C7D9C70001BA9F1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -297,7 +281,6 @@
 				INFOPLIST_FILE = "Viper Todo List/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -325,7 +308,6 @@
 				INFOPLIST_FILE = "Viper Todo List/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
