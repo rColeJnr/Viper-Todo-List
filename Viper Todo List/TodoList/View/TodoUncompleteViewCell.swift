@@ -55,7 +55,7 @@ class TodoUncompleteViewCell: UICollectionViewCell {
     private let details = {
        let view = UILabel()
        view.text = "Tap to add description..."
-       view.font = .systemFont(ofSize: 18, weight: .medium)
+       view.font = .systemFont(ofSize: 22, weight: .medium)
        view.textColor = .label
         view.numberOfLines = 2
        view.translatesAutoresizingMaskIntoConstraints = false
@@ -113,7 +113,7 @@ class TodoUncompleteViewCell: UICollectionViewCell {
             horizontalDivider.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             horizontalDivider.trailingAnchor.constraint(equalTo: verticalDivider.leadingAnchor, constant: -5),
             
-            detailsLabel.bottomAnchor.constraint(equalTo: details.topAnchor, constant: -5),
+            detailsLabel.bottomAnchor.constraint(equalTo: details.topAnchor),
             detailsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             detailsLabel.trailingAnchor.constraint(equalTo: verticalDivider.leadingAnchor, constant: -5),
             

@@ -10,6 +10,8 @@ import UIKit
 class TodoListViewController: UIViewController {
     
     private let todoListView = TodoListView()
+    private var detailsVC: TodoDetailsViewController?
+    var router: TodoListRouterProtocol?
     
     let dummyData = [
         Todo(name: "Memorize a poem", details: "Memorize a love poem to recite to someonMemorize a love poem to recite to someonMemorize a love poem to recite to someone", dateCreated: "28/08/2024", status: true),
@@ -22,6 +24,7 @@ class TodoListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupView(todoListView)
         addConstrains()
+        detailsVC = router?.createTodoDetailsViewController()
         todoListView.collectionView?.delegate = self
         todoListView.collectionView?.dataSource = self
     }
@@ -107,6 +110,14 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let todo = dummyData[indexPath.row]
+        guard let detailsVC = self.detailsVC else {
+            fatalError("DetailsVC is null")
+        }
+        navigationController?.pushViewController(detailsVC, animated: true)
     }
     
 }
