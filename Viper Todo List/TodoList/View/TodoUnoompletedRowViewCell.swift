@@ -7,9 +7,11 @@
 
 import UIKit
 
+
 class TodoUncompleteRowViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoUncompleteRowViewCell"
+    public var delegate: NavigateToShowAllViewCellDelegate?
     
     private let title: UILabel = {
         let view = UILabel()
@@ -22,17 +24,17 @@ class TodoUncompleteRowViewCell: UICollectionViewCell {
     }()
     
     private let showAll = {
-       let view = UILabel()
-       view.text = "Show all"
-       view.font = .systemFont(ofSize: 18, weight: .medium)
-       view.textColor = .blue
+        let view = UILabel()
+        view.text = "Show all"
+        view.font = .systemFont(ofSize: 18, weight: .medium)
+        view.textColor = .blue
         view.isUserInteractionEnabled = true
-       view.translatesAutoresizingMaskIntoConstraints = false
-       return view
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
       
-    @objc private func statusValueDidChange(_ sender: UISwitch) {
-        print("Value change")
+    @objc private func navigateToShowAll(_ sender: Any) {
+        delegate?.navigateToShowAll("In Progress")
     }
     
     override init(frame: CGRect) {
@@ -40,7 +42,7 @@ class TodoUncompleteRowViewCell: UICollectionViewCell {
         contentView.backgroundColor = .systemBackground
 
         contentView.addSubviews(title, showAll)
-//        statusSwitch.addTarget(self, action: #selector(statusValueDidChange(_ :)), for: .valueChanged)
+        showAll.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(navigateToShowAll(_ :))))
         addConstraints()
         
     }
@@ -63,12 +65,4 @@ class TodoUncompleteRowViewCell: UICollectionViewCell {
         ])
     }
     
-
-//    /// Bind Todo item to UI
-//    func configure(todo: Todo) {
-//        name.text = todo.name
-//        details.text = todo.details
-//        dateCreated.text = todo.dateCreated
-//        statusSwitch.isOn = todo.status
-//    }
 }

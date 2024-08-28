@@ -9,6 +9,7 @@ import UIKit
 
 protocol TodoListRouterProtocol: AnyObject {
     func createTodoDetailsViewController() -> TodoDetailsViewController
+    func createTodoShowAllViewController(_ title: String) -> TodoShowAllViewController
     func createModule() -> TodoListViewController
     
 }
@@ -17,6 +18,10 @@ class TodoListRouter: TodoListRouterProtocol {
     
     func createTodoDetailsViewController() -> TodoDetailsViewController {
         return TodoDetailsRouter().createModule()
+    }
+    
+    func createTodoShowAllViewController(_ title: String) -> TodoShowAllViewController {
+        return TodoShowAllRouter().createModule(title)
     }
     
     func createModule() -> TodoListViewController {

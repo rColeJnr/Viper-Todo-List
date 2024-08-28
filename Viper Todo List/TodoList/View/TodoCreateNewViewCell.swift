@@ -24,8 +24,7 @@ class TodoCreateNewViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .secondarySystemBackground
-
+        contentView.backgroundColor = .systemBackground
         contentView.addSubview(button)
         addConstraints()
         
@@ -43,7 +42,6 @@ class TodoCreateNewViewCell: UICollectionViewCell {
             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
-           
         ])
     }
     

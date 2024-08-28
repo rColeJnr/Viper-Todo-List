@@ -21,7 +21,6 @@ class TodoCompleteViewCell: UICollectionViewCell {
         return view
     }()
 
-    
     private let details = {
        let view = UILabel()
        view.text = "Tap to add description..."

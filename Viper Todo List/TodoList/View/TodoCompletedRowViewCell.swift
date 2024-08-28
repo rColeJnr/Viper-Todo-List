@@ -10,6 +10,7 @@ import UIKit
 class TodoCompleteRowViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoCompleteRowViewCell"
+    public var delegate: NavigateToShowAllViewCellDelegate?
     
     private let title: UILabel = {
         let view = UILabel()
@@ -22,27 +23,25 @@ class TodoCompleteRowViewCell: UICollectionViewCell {
     }()
     
     private let showAll = {
-       let view = UILabel()
-       view.text = "Show all"
-       view.font = .systemFont(ofSize: 18, weight: .medium)
-       view.textColor = .blue
+        let view = UILabel()
+        view.text = "Show all"
+        view.font = .systemFont(ofSize: 18, weight: .medium)
+        view.textColor = .blue
         view.isUserInteractionEnabled = true
-       view.translatesAutoresizingMaskIntoConstraints = false
-       return view
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
       
-    @objc private func statusValueDidChange(_ sender: UISwitch) {
-        print("Value change")
+    @objc private func navigateToShowAll(_ sender: UISwitch) {
+        delegate?.navigateToShowAll("Completed")
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .systemBackground
-
         contentView.addSubviews(title, showAll)
-//        statusSwitch.addTarget(self, action: #selector(statusValueDidChange(_ :)), for: .valueChanged)
+        showAll.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(navigateToShowAll(_ :))))
         addConstraints()
-        
     }
     
     required init?(coder: NSCoder) {

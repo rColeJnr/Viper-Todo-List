@@ -13,15 +13,15 @@ class TodoDetailsView: UIView {
         let view = UILabel()
         view.text = "Название задачи"
         view.textColor = .label
-        view.font = .systemFont(ofSize: 22, weight: .semibold)
-//        view.textAlignment = .left
+        view.font = .systemFont(ofSize: 22, weight: .medium)
+        view.textAlignment = .left
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let name = {
-        let view = UITextField()
-        view.placeholder = "Название задачи"
+        let view = UITextView()
+        view.isEditable = true
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 15
         view.font = .systemFont(ofSize: 20, weight: .medium)
@@ -34,24 +34,37 @@ class TodoDetailsView: UIView {
         let view = UILabel()
         view.text = "Описание задачи"
         view.textColor = .label
-        view.font = .systemFont(ofSize: 22, weight: .semibold)
+        view.font = .systemFont(ofSize: 22, weight: .medium)
         view.textAlignment = .left
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let descriptionTF = {
-        let view = UITextField()
-        view.placeholder = "Описание задачи"
+        let view = UITextView()
+        view.isEditable = true
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 15
         view.font = .systemFont(ofSize: 20, weight: .medium)
         view.textColor = .label
-//        view.textAlignment = .left
+        view.textAlignment = .left
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    private let markAsComplete = {
+        var viewConfig = UIButton.Configuration.plain()
+        viewConfig.title = "Mark as Completed"
+        viewConfig.baseForegroundColor = .systemBlue
+        viewConfig.image = UIImage(systemName: "checkmark.circle")
+        viewConfig.imagePlacement = .trailing
+        viewConfig.imagePadding = 25
+        let view = UIButton(configuration: viewConfig)
+        view.titleLabel?.adjustsFontSizeToFitWidth = true
+        view.isUserInteractionEnabled = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private let dateCreated = {
         let view = UILabel()
@@ -70,10 +83,10 @@ class TodoDetailsView: UIView {
         viewConfig.baseBackgroundColor = .systemRed
         viewConfig.baseForegroundColor = .white
         let view = UIButton(configuration: viewConfig)
+        view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private let saveBtn = {
         var viewConfig = UIButton.Configuration.bordered()
@@ -82,6 +95,7 @@ class TodoDetailsView: UIView {
         viewConfig.baseBackgroundColor = .systemBlue
         viewConfig.baseForegroundColor = .white
         let view = UIButton(configuration: viewConfig)
+        view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -89,7 +103,7 @@ class TodoDetailsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(nameLabel, name, descriptionLabel, descriptionTF, dateCreated, deleteBtn, saveBtn)
+        addSubviews(nameLabel, name, descriptionLabel, descriptionTF, markAsComplete, dateCreated, deleteBtn, saveBtn)
         addConstraints()
     }
     
@@ -114,10 +128,15 @@ class TodoDetailsView: UIView {
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 8),
             
-            descriptionTF.heightAnchor.constraint(equalToConstant: 350),
-            descriptionTF.bottomAnchor.constraint(equalTo: dateCreated.topAnchor, constant: -10),
+            descriptionTF.heightAnchor.constraint(equalToConstant: 280),
+            descriptionTF.bottomAnchor.constraint(equalTo: markAsComplete.topAnchor, constant: -10),
             descriptionTF.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             descriptionTF.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
+            markAsComplete.heightAnchor.constraint(equalToConstant: 70),
+            markAsComplete.bottomAnchor.constraint(equalTo: dateCreated.topAnchor, constant: -10),
+            markAsComplete.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            markAsComplete.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
             dateCreated.bottomAnchor.constraint(equalTo: deleteBtn.topAnchor, constant: -25),
             dateCreated.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),

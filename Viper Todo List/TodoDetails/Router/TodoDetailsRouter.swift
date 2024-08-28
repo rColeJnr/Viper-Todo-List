@@ -17,7 +17,7 @@ class TodoDetailsRouter: TodoDetailsRouterProtocol {
     
     func createModule() -> TodoDetailsViewController {
         let view = TodoDetailsViewController()
-        view.title = "Описания"
+        view.title = "Описание"
         self.viewController = view
         return view
     }

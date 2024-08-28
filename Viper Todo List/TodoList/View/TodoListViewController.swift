@@ -7,36 +7,37 @@
 
 import UIKit
 
-class TodoListViewController: UIViewController {
-    
+protocol NavigateToShowAllViewCellDelegate: AnyObject {
+    func navigateToShowAll(_ title: String)
+}
+
+class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegate {
+
     private let todoListView = TodoListView()
     private var detailsVC: TodoDetailsViewController?
     var router: TodoListRouterProtocol?
     
-    let dummyData = [
-        Todo(name: "Memorize a poem", details: "Memorize a love poem to recite to someonMemorize a love poem to recite to someonMemorize a love poem to recite to someone", dateCreated: "28/08/2024", status: true),
-        Todo(name: "Memorize another poem", details: "Memorize yet a love poem to recite to someone", dateCreated: "28/08/2024", status: false),
-        Todo(name: "Memorize yet another poem", details: "Memorize one more love poem to recite to someone", dateCreated: "28/08/2024", status: false),
-    ]
-//    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupView(todoListView)
-        addConstrains()
+        
         detailsVC = router?.createTodoDetailsViewController()
+        
         todoListView.collectionView?.delegate = self
         todoListView.collectionView?.dataSource = self
+    
     }
     
-    private func addConstrains() {
-         NSLayoutConstraint.activate([
-            todoListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            todoListView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            todoListView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            todoListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
+    func navigateToShowAll(_ title: String) {
+        
+        guard let showAllVC = router?.createTodoShowAllViewController(title) else {
+            fatalError("Failed to create Show all controller")
+        }
+        
+        navigationController?.pushViewController( showAllVC, animated: true)
     }
+    
 }
 
 extension TodoListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -88,6 +89,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             ) as? TodoCompleteRowViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             return cell
         
         case .uncompletedRow:
@@ -97,6 +99,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             ) as? TodoUncompleteRowViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             return cell
             
         case .createNew:

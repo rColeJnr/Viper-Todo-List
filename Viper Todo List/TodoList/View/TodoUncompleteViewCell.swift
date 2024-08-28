@@ -70,10 +70,6 @@ class TodoUncompleteViewCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-       
-    @objc private func statusValueDidChange(_ sender: UISwitch) {
-        print("Value change")
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -143,18 +139,3 @@ class TodoUncompleteViewCell: UICollectionViewCell {
         dateCreated.text = todo.dateCreated
     }
 }
-
-struct Todo {
-    let name: String
-    let details: String
-    let dateCreated: String
-    let status: Bool
-    
-    init(name: String, details: String, dateCreated: String, status: Bool) {
-        self.name = name
-        self.details = details
-        self.dateCreated = dateCreated
-        self.status = status
-    }
-}
-
