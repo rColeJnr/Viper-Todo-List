@@ -9,9 +9,18 @@ import UIKit
 
 class TodoDetailsViewController: UIViewController {
     
+    private var detailsView = TodoDetailsView()
+    
+    var todo: Todo! {
+        didSet {
+            detailsView.configure(todo: todo)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBrown
+        view.backgroundColor = .systemBackground
+        setupView(detailsView)
     }
     
 }

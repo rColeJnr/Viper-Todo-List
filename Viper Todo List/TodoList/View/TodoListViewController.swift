@@ -117,6 +117,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
         guard let detailsVC = self.detailsVC else {
             fatalError("DetailsVC is null")
         }
+        detailsVC.todo = todo
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     

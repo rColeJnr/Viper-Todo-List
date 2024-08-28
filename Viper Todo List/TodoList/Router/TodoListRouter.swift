@@ -21,6 +21,8 @@ class TodoListRouter: TodoListRouterProtocol {
     
     func createModule() -> TodoListViewController {
         let view = TodoListViewController()
+        let router: TodoListRouterProtocol = TodoListRouter()
+        view.router = router
         view.title = "Задачи"
         self.viewController = view
         return view
