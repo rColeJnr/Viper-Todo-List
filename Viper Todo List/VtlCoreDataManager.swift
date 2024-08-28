@@ -19,5 +19,4 @@ class CoreDataManager {
         })
         return container
     }()
-
 }

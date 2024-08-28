@@ -21,7 +21,7 @@ protocol RemoteManagerResponseProtocol {
     func onError(_ error: Error)
 }
 
-class RemoteManager {
+class RemoteDataManager {
     var remoteRequestHandler: RemoteManagerResponseProtocol?
     
     private let baseUrl = "https://dummyjson.com/todos"
@@ -85,7 +85,7 @@ class RemoteManager {
             
             var todos = [Todo]()
             for todoJson in dummyTodos {
-                if let todo = RemoteManager.todo(fromJson: todoJson, into: context) {
+                if let todo = RemoteDataManager.todo(fromJson: todoJson, into: context) {
                     todos.append(todo)
                 }
             }
@@ -120,7 +120,9 @@ class RemoteManager {
     }
 }
 
-enum VtlApiError: Error {
+enum VtlError: Error {
     case InvalidJsonData
     case FailedToParse
+    
+    case CouldNotSaveObject
 }

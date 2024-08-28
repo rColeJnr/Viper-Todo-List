@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DummyJsonResult {
+enum VtlTodoResult {
     case success([Todo])
     case failure(Error)
 }
