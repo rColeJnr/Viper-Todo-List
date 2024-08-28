@@ -12,7 +12,7 @@ protocol RemoteManagerProtocol {
     var remoteRequestHandler: RemoteManagerResponseProtocol? { get set }
     
     // Interactor -> RemoteManager
-    func fetchTodos(completion: @escaping () -> Void)
+    func fetchTodos(completion: @escaping (VtlTodoResult) -> Void)
 }
 
 protocol RemoteManagerResponseProtocol {
@@ -21,7 +21,7 @@ protocol RemoteManagerResponseProtocol {
     func onError(_ error: Error)
 }
 
-class RemoteDataManager {
+class RemoteDataManager: RemoteManagerProtocol {
     var remoteRequestHandler: RemoteManagerResponseProtocol?
     
     private let baseUrl = "https://dummyjson.com/todos"
@@ -31,7 +31,7 @@ class RemoteDataManager {
         return URLSession(configuration: config)
     }()
     
-    func fetchTodos(completion: @escaping (DummyJsonResult) -> Void) {
+    func fetchTodos(completion: @escaping (VtlTodoResult) -> Void) {
         guard let url = URL(string: baseUrl) else {
             fatalError("Failed to create dummyjson url")
         }
@@ -62,17 +62,35 @@ class RemoteDataManager {
         task.resume()
     }
     
-    private func processTodosRequest(data: Data?, error: Error?, completion: @escaping (DummyJsonResult) -> Void) {
+    private func processTodosRequest(data: Data?, error: Error?, completion: @escaping (VtlTodoResult) -> Void) {
         guard let jsonData = data else {
             return completion(.failure(error!))
         }
         
         CoreDataManager.persistentContainer.performBackgroundTask { context in
             let result = self.serializeDummyTodo(fromJson: jsonData, into: context)
+            
+            do {
+                try context.save()
+            } catch {
+                completion(.failure(VtlError.FailedToSaveToCoreData))
+                return
+            }
+            
+            switch result {
+            case .success(let array):
+                let todoIds = array.map { return $0.objectID }
+                let viewContext =  CoreDataManager.persistentContainer.viewContext
+                let viewContextTodos = todoIds.map { return viewContext.object(with: $0) } as! [Todo]
+                completion(.success(viewContextTodos))
+            case .failure:
+                completion(result)
+            }
+            
         }
     }
     
-    private func serializeDummyTodo(fromJson json: Data, into context: NSManagedObjectContext) -> DummyJsonResult {
+    private func serializeDummyTodo(fromJson json: Data, into context: NSManagedObjectContext) -> VtlTodoResult {
         
         do {
             let jsonObj = try JSONSerialization.jsonObject(with: json)
@@ -80,7 +98,7 @@ class RemoteDataManager {
                 let jsonDictionary = jsonObj as? [AnyHashable:Any],
                 let dummyTodos = jsonDictionary["todos"] as? [[String:Any]] else {
                 // The json structure doenst match our expectations
-                return .failure(VtlApiError.InvalidJsonData)
+                return .failure(VtlError.InvalidJsonData)
             }
             
             var todos = [Todo]()
@@ -92,7 +110,7 @@ class RemoteDataManager {
             
             if todos.isEmpty && !dummyTodos.isEmpty {
                 // we weren't able to parse any of the dummyjsonTodos to todos
-                return .failure(VtlApiError.FailedToParse)
+                return .failure(VtlError.FailedToParse)
             }
             
             return .success(todos)
@@ -123,6 +141,6 @@ class RemoteDataManager {
 enum VtlError: Error {
     case InvalidJsonData
     case FailedToParse
-    
+    case FailedToSaveToCoreData
     case CouldNotSaveObject
 }
