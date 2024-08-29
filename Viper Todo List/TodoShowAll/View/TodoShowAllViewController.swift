@@ -7,9 +7,16 @@
 
 import UIKit
 
-class TodoShowAllViewController: UIViewController, TodoShowAllViewDelegate {
+protocol TodoShowAllViewProtocol: AnyObject {
+    var presenter: TodoShowAllPresenterProtocol? { get set }
     
-    var router: TodoShowAllRouterProtocol?
+    // Presenter -> View
+    func showTodoList(for list: [Todo])
+}
+
+class TodoShowAllViewController: UIViewController, TodoShowAllViewDelegate, TodoShowAllViewProtocol {
+    
+    var presenter: TodoShowAllPresenterProtocol?
     
     private let todoShowAllView = TodoShowAllView()
     
@@ -18,14 +25,15 @@ class TodoShowAllViewController: UIViewController, TodoShowAllViewDelegate {
         view.backgroundColor = .systemBackground
         todoShowAllView.delegate = self
         setupView(todoShowAllView)
+        presenter?.viewDidLoad()
     }
     
     func didSelectTodo(with todo: Todo) {
-        guard let detailsVC = router?.createTodoDetailsViewController() else {
-            fatalError("DetailsVC is null")
-        }
-        detailsVC.todo = todo
-        navigationController?.pushViewController(detailsVC, animated: true)
+        presenter?.router?.createTodoDetailsViewController(from: self, for: todo)
+    }
+    
+    func showTodoList(for list: [Todo]) {
+        todoShowAllView.todoList = list
     }
     
 }

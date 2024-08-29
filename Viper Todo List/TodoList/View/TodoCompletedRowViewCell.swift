@@ -33,7 +33,7 @@ class TodoCompleteRowViewCell: UICollectionViewCell {
     }()
       
     @objc private func navigateToShowAll(_ sender: UISwitch) {
-        delegate?.navigateToShowAll("Completed")
+        delegate?.navigateToShowAll("Completed", completed: true)
     }
     
     override init(frame: CGRect) {

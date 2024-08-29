@@ -10,7 +10,7 @@ import UIKit
 protocol TodoListRouterProtocol: AnyObject {
     // Presenter -> Router
     func createTodoDetailsViewController(from view: TodoListViewProtocol, for todo: Todo)
-    func createTodoShowAllViewController(from view: TodoListViewProtocol, _ title: String)
+    func createTodoShowAllViewController(from view: TodoListViewProtocol, with title: String, for list: [Todo])
     func createModule() -> TodoListViewController
     
 }
@@ -25,8 +25,8 @@ class TodoListRouter: TodoListRouterProtocol {
         }
     }
     
-    func createTodoShowAllViewController(from view: TodoListViewProtocol, _ title: String) {
-        let showAllVC = TodoShowAllRouter().createModule(title)
+    func createTodoShowAllViewController(from view: TodoListViewProtocol, with title: String, for list: [Todo]) {
+        let showAllVC = TodoShowAllRouter().createModule(with: title, for: list)
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(showAllVC, animated: true)
         }

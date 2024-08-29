@@ -8,7 +8,7 @@
 import UIKit
 
 protocol NavigateToShowAllViewCellDelegate: AnyObject {
-    func navigateToShowAll(_ title: String)
+    func navigateToShowAll(_ title: String, completed flag: Bool)
 }
 
 protocol TodoListViewProtocol: AnyObject {
@@ -47,8 +47,13 @@ class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegat
     
     }
     
-    func navigateToShowAll(_ title: String) {
-        presenter?.router?.createTodoShowAllViewController(from: self, title)
+    func navigateToShowAll(_ title: String, completed flag: Bool) {
+        let list = if flag {
+            todoCompletedList
+        } else {
+            todoUncompletedList
+        }
+        presenter?.router?.createTodoShowAllViewController(from: self, with: title, for: list)
     }
     
 }
@@ -129,7 +134,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodoCompleteViewCell.cellIdentifier, for: indexPath) as? TodoCompleteViewCell {
+        if collectionView.dequeueReusableCell(withReuseIdentifier: TodoCompleteViewCell.cellIdentifier, for: indexPath) is TodoCompleteViewCell {
                 let todo = todoCompletedList[indexPath.row]
                 presenter?.showTodoDetails(for: todo)
         } else {

@@ -136,6 +136,6 @@ class TodoUncompleteViewCell: UICollectionViewCell {
     func configure(todo: Todo) {
         name.text = todo.name
         details.text = todo.details
-        dateCreated.text = todo.dateCreated
+        dateCreated.text = Date.now.description
     }
 }

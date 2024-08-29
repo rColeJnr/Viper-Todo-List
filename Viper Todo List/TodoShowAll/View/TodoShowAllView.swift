@@ -14,6 +14,7 @@ protocol TodoShowAllViewDelegate: AnyObject {
 class TodoShowAllView: UIView {
     
     public weak var delegate: TodoShowAllViewDelegate?
+    var todoList: [Todo] = []
     
     private var collectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -67,14 +68,14 @@ class TodoShowAllView: UIView {
 
 extension TodoShowAllView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyData.count
+        return todoList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodoUncompleteViewCell.cellIdentifier, for: indexPath) as? TodoUncompleteViewCell else {
             fatalError("Failed to create show all view cell")
         }
-        cell.configure(todo: dummyData[indexPath.row])
+        cell.configure(todo: todoList[indexPath.row])
         
         return cell
     }
@@ -92,7 +93,7 @@ extension TodoShowAllView: UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let todo = dummyData[indexPath.row]
+        let todo = todoList[indexPath.row]
         delegate?.didSelectTodo(with: todo)
     }
 }

@@ -34,7 +34,7 @@ class TodoUncompleteRowViewCell: UICollectionViewCell {
     }()
       
     @objc private func navigateToShowAll(_ sender: Any) {
-        delegate?.navigateToShowAll("In Progress")
+        delegate?.navigateToShowAll("In Progress", completed: false)
     }
     
     override init(frame: CGRect) {
