@@ -155,7 +155,7 @@ class TodoDetailsView: UIView {
         ])
     }
     
-    func configure(todo: Todo) {
+    func configure(with todo: Todo) {
         name.text = todo.name
         descriptionTF.text = todo.details
         dateCreated.text = "Созданно : \(todo.dateCreated)"

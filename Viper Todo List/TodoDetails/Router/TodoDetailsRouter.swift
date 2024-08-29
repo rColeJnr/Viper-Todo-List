@@ -13,13 +13,16 @@ protocol TodoDetailsRouterProtocol: AnyObject {
 }
 
 class TodoDetailsRouter: TodoDetailsRouterProtocol {
-    weak var viewController: UIViewController?
     
     func createModule(for todo: Todo) -> TodoDetailsViewController {
         let view = TodoDetailsViewController()
-        view.todo = todo
+        let presenter: TodoDetailsPresenterProtocol = TodoDetailsPresenter()
+        let router: TodoDetailsRouterProtocol = TodoDetailsRouter()
+        view.presenter = presenter
+        presenter.view = view
+        presenter.todo = todo
+        presenter.router = router
         view.title = "Описание"
-        self.viewController = view
         return view
     }
 }

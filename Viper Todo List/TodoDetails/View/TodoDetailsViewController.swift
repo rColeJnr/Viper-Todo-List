@@ -7,20 +7,27 @@
 
 import UIKit
 
-class TodoDetailsViewController: UIViewController {
+protocol TodoDetailsViewProtocol: AnyObject {
+    var presenter: TodoDetailsPresenterProtocol? { get set }
+    
+    // Presenter -> View
+    func showTodoDetails(for todo: Todo)
+}
+
+class TodoDetailsViewController: UIViewController, TodoDetailsViewProtocol {
     
     private var detailsView = TodoDetailsView()
-    
-    var todo: Todo! {
-        didSet {
-            detailsView.configure(todo: todo)
-        }
-    }
-    
+    var presenter: TodoDetailsPresenterProtocol?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupView(detailsView)
+        presenter?.viewDidLoad()
+    }
+    
+    func showTodoDetails(for todo: Todo) {
+        detailsView.configure(with: todo)
     }
     
 }
