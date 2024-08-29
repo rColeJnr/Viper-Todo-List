@@ -8,15 +8,16 @@
 import UIKit
 
 protocol TodoDetailsRouterProtocol: AnyObject {
-    func createModule() -> TodoDetailsViewController
+    func createModule(for todo: Todo) -> TodoDetailsViewController
     
 }
 
 class TodoDetailsRouter: TodoDetailsRouterProtocol {
     weak var viewController: UIViewController?
     
-    func createModule() -> TodoDetailsViewController {
+    func createModule(for todo: Todo) -> TodoDetailsViewController {
         let view = TodoDetailsViewController()
+        view.todo = todo
         view.title = "Описание"
         self.viewController = view
         return view

@@ -11,18 +11,36 @@ protocol NavigateToShowAllViewCellDelegate: AnyObject {
     func navigateToShowAll(_ title: String)
 }
 
+protocol TodoListViewProtocol: AnyObject {
+    var presenter: TodoListPresenterProtocol? { get set }
+    
+    // Presenter -> View
+    func showUncompletedTodos(with todos: [Todo])
+    
+    func showUncompletedLoading()
+    
+    func hideUncompletedLoading()
+    
+    func showCompletedTodos(with todos: [Todo])
+    
+    func showCompletedLoading()
+    
+    func hideCompletedLoading()
+    
+    func showError(error: Error)
+}
+
 class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegate {
 
     private let todoListView = TodoListView()
-    private var detailsVC: TodoDetailsViewController?
-    var router: TodoListRouterProtocol?
+    var presenter: TodoListPresenterProtocol?
+    var todoUncompletedList: [Todo] = []
+    var todoCompletedList: [Todo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupView(todoListView)
-        
-        detailsVC = router?.createTodoDetailsViewController()
         
         todoListView.collectionView?.delegate = self
         todoListView.collectionView?.dataSource = self
@@ -30,12 +48,7 @@ class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegat
     }
     
     func navigateToShowAll(_ title: String) {
-        
-        guard let showAllVC = router?.createTodoShowAllViewController(title) else {
-            fatalError("Failed to create Show all controller")
-        }
-        
-        navigationController?.pushViewController( showAllVC, animated: true)
+        presenter?.router?.createTodoShowAllViewController(from: self, title)
     }
     
 }
@@ -50,9 +63,9 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
         let sectionType = TodoListSectionType.allCases[section]
         switch sectionType {
         case .uncompleted:
-            return dummyData.count
+            return todoUncompletedList.count
         case .completed:
-            return dummyData.count
+            return todoCompletedList.count
         default:
             return 1
         }
@@ -69,7 +82,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             ) as? TodoCompleteViewCell else {
                 fatalError()
             }
-            cell.configure(todo: dummyData[indexPath.row])
+            cell.configure(todo: todoCompletedList[indexPath.row])
             return cell
             
         case .uncompleted:
@@ -79,7 +92,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             ) as? TodoUncompleteViewCell else {
                 fatalError()
             }
-            cell.configure(todo: dummyData[indexPath.row])
+            cell.configure(todo: todoUncompletedList[indexPath.row])
             return cell
         
         case .completedRow:
@@ -116,12 +129,46 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let todo = dummyData[indexPath.row]
-        guard let detailsVC = self.detailsVC else {
-            fatalError("DetailsVC is null")
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodoCompleteViewCell.cellIdentifier, for: indexPath) as? TodoCompleteViewCell {
+                let todo = todoCompletedList[indexPath.row]
+                presenter?.showTodoDetails(for: todo)
+        } else {
+            let todo = todoUncompletedList[indexPath.row]
+            presenter?.showTodoDetails(for: todo)
         }
-        detailsVC.todo = todo
-        navigationController?.pushViewController(detailsVC, animated: true)
     }
+    
+}
+
+extension TodoListViewController: TodoListViewProtocol {
+    func showUncompletedTodos(with todos: [Todo]) {
+        todoUncompletedList = todos
+    }
+    
+    func showUncompletedLoading() {
+        // not implemented yet
+    }
+    
+    func hideUncompletedLoading() {
+        // not implemented yet
+    }
+    
+    func showCompletedTodos(with todos: [Todo]) {
+        todoCompletedList = todos
+    }
+    
+    func showCompletedLoading() {
+        // not implemented yet
+    }
+    
+    func hideCompletedLoading() {
+        // not implemented yet
+    }
+    
+    func showError(error: any Error) {
+        print("failed to load with error: \(error.localizedDescription)")
+        // not implemented yet
+    }
+    
     
 }

@@ -17,7 +17,9 @@ protocol RemoteManagerProtocol {
 
 protocol RemoteManagerResponseProtocol {
     // RemoteManager -> Interactor
-    func onTodosFetched(_ todos: [Todo])
+    // Interactor -> Presenter
+    func didGetCompletedTodos(_ todos: [Todo])
+    func didGetUncompletedTodos(_ todos: [Todo])
     func onError(_ error: Error)
 }
 
@@ -52,7 +54,8 @@ class RemoteDataManager: RemoteManagerProtocol {
                 OperationQueue.main.addOperation {
                     switch result {
                     case .success(let todos):
-                        self.remoteRequestHandler?.onTodosFetched(todos)
+                        self.remoteRequestHandler?.didGetCompletedTodos(todos.filter({it in it.completed}))
+                        self.remoteRequestHandler?.didGetUncompletedTodos(todos.filter({it in !it.completed}))
                     case .failure(let error):
                         self.remoteRequestHandler?.onError(error)
                     }

@@ -24,9 +24,10 @@
 		750E3D8F2C7F562400D0E9DD /* Todo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E3D8D2C7F562400D0E9DD /* Todo+CoreDataClass.swift */; };
 		750E3D902C7F562400D0E9DD /* Todo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E3D8E2C7F562400D0E9DD /* Todo+CoreDataProperties.swift */; };
 		750E3D9E2C7F621900D0E9DD /* RemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E3D9D2C7F621900D0E9DD /* RemoteDataManager.swift */; };
-		750E3DA02C7F635700D0E9DD /* DummyJsonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E3D9F2C7F635700D0E9DD /* DummyJsonResult.swift */; };
+		750E3DA02C7F635700D0E9DD /* VtlTodoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E3D9F2C7F635700D0E9DD /* VtlTodoResult.swift */; };
 		750E3DA22C7F73A200D0E9DD /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E3DA12C7F73A200D0E9DD /* LocalDataManager.swift */; };
 		750E3DA42C7F7B7A00D0E9DD /* TodoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E3DA32C7F7B7A00D0E9DD /* TodoListInteractor.swift */; };
+		750E3DA62C7F8A4100D0E9DD /* TodoListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E3DA52C7F8A4100D0E9DD /* TodoListPresenter.swift */; };
 		75555D102C7DF7A300EFA4E5 /* TodoCompleteViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75555D0F2C7DF7A300EFA4E5 /* TodoCompleteViewCell.swift */; };
 		75555D122C7E0E8200EFA4E5 /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75555D112C7E0E8200EFA4E5 /* TodoListView.swift */; };
 		75EE130E2C7D9C6F001BA9F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE130D2C7D9C6F001BA9F1 /* AppDelegate.swift */; };
@@ -55,9 +56,10 @@
 		750E3D8D2C7F562400D0E9DD /* Todo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Todo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		750E3D8E2C7F562400D0E9DD /* Todo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Todo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		750E3D9D2C7F621900D0E9DD /* RemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataManager.swift; sourceTree = "<group>"; };
-		750E3D9F2C7F635700D0E9DD /* DummyJsonResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyJsonResult.swift; sourceTree = "<group>"; };
+		750E3D9F2C7F635700D0E9DD /* VtlTodoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VtlTodoResult.swift; sourceTree = "<group>"; };
 		750E3DA12C7F73A200D0E9DD /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		750E3DA32C7F7B7A00D0E9DD /* TodoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListInteractor.swift; sourceTree = "<group>"; };
+		750E3DA52C7F8A4100D0E9DD /* TodoListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListPresenter.swift; sourceTree = "<group>"; };
 		75555D0F2C7DF7A300EFA4E5 /* TodoCompleteViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCompleteViewCell.swift; sourceTree = "<group>"; };
 		75555D112C7E0E8200EFA4E5 /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
 		75EE130A2C7D9C6F001BA9F1 /* Viper Todo List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Viper Todo List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,6 +248,7 @@
 		75EE13252C7DD3DC001BA9F1 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				750E3DA52C7F8A4100D0E9DD /* TodoListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -255,7 +258,7 @@
 			children = (
 				750E3D8D2C7F562400D0E9DD /* Todo+CoreDataClass.swift */,
 				750E3D8E2C7F562400D0E9DD /* Todo+CoreDataProperties.swift */,
-				750E3D9F2C7F635700D0E9DD /* DummyJsonResult.swift */,
+				750E3D9F2C7F635700D0E9DD /* VtlTodoResult.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				750E3D6B2C7E6FFF00D0E9DD /* TodoUnoompletedRowViewCell.swift in Sources */,
 				750E3D8C2C7F532B00D0E9DD /* VtlCoreData.xcdatamodeld in Sources */,
 				75EE13292C7DD459001BA9F1 /* TodoListViewController.swift in Sources */,
+				750E3DA62C7F8A4100D0E9DD /* TodoListPresenter.swift in Sources */,
 				750E3DA22C7F73A200D0E9DD /* LocalDataManager.swift in Sources */,
 				75EE130E2C7D9C6F001BA9F1 /* AppDelegate.swift in Sources */,
 				750E3D892C7F530100D0E9DD /* VtlCoreDataManager.swift in Sources */,
@@ -370,7 +374,7 @@
 				750E3DA42C7F7B7A00D0E9DD /* TodoListInteractor.swift in Sources */,
 				75555D102C7DF7A300EFA4E5 /* TodoCompleteViewCell.swift in Sources */,
 				750E3D672C7E5F0900D0E9DD /* TodoUncompleteViewCell.swift in Sources */,
-				750E3DA02C7F635700D0E9DD /* DummyJsonResult.swift in Sources */,
+				750E3DA02C7F635700D0E9DD /* VtlTodoResult.swift in Sources */,
 				750E3D692C7E6FE100D0E9DD /* TodoCreateNewViewCell.swift in Sources */,
 				750E3D782C7EA9F000D0E9DD /* TodoDetailsRouter.swift in Sources */,
 			);

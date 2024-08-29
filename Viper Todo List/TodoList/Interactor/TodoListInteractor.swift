@@ -78,7 +78,7 @@ class TodoListInteractor: TodoListInteractorProtocol {
 }
 
 
-extension TodoListInteractor: TodoListInteractorResponseProtocol {
+extension TodoListInteractor: RemoteManagerResponseProtocol {
     
     func didGetCompletedTodos(_ todos: [Todo]) {
         presenter?.didGetCompletedTodos(todos)
