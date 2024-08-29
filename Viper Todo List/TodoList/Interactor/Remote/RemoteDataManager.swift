@@ -40,16 +40,7 @@ class RemoteDataManager: RemoteManagerProtocol {
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request, completionHandler: { (data, _, error) -> Void in
             //                 Print json response
-            //                if let jsonData = data {
-            //                    if let josnString = String(data: jsonData, encoding: .utf8) {
-            //                        print(josnString)
-            //                    } else if let requestError = error {
-            //                            print("error fetching: \(requestError)")
-            //                        }
-            //                } else {
-            //                    print("unxecpected error")
-            //                }
-            
+     
             self.processTodosRequest(data: data, error: error, completion: { result in
                 OperationQueue.main.addOperation {
                     switch result {

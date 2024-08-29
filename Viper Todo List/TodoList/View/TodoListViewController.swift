@@ -41,7 +41,7 @@ class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegat
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupView(todoListView)
-        
+        presenter?.viewDidLoad()
         todoListView.collectionView?.delegate = self
         todoListView.collectionView?.dataSource = self
     
@@ -68,8 +68,10 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
         let sectionType = TodoListSectionType.allCases[section]
         switch sectionType {
         case .uncompleted:
+            print("count uncompleted: \(todoUncompletedList.count)")
             return todoUncompletedList.count
         case .completed:
+            print("count completed: \(todoCompletedList.count)")
             return todoCompletedList.count
         default:
             return 1
@@ -147,7 +149,9 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension TodoListViewController: TodoListViewProtocol {
     func showUncompletedTodos(with todos: [Todo]) {
+        print("view uncompleted \(todos.count)")
         todoUncompletedList = todos
+        todoListView.collectionView?.reloadData()
     }
     
     func showUncompletedLoading() {
@@ -160,6 +164,7 @@ extension TodoListViewController: TodoListViewProtocol {
     
     func showCompletedTodos(with todos: [Todo]) {
         todoCompletedList = todos
+        todoListView.collectionView?.reloadData()
     }
     
     func showCompletedLoading() {

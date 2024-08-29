@@ -11,7 +11,7 @@ import UIKit
 class CoreDataManager {
     
     static let persistentContainer: NSPersistentCloudKitContainer = {
-        let container = NSPersistentCloudKitContainer(name: "EcsCoreData")
+        let container = NSPersistentCloudKitContainer(name: "VtlCoreData")
         container.loadPersistentStores(completionHandler: {description, error in
             if let error = error {
                 print("Error setting up core data: \(error)")

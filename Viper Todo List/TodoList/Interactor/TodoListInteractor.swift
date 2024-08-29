@@ -40,12 +40,14 @@ class TodoListInteractor: TodoListInteractorProtocol {
                     self?.remoteDataManager?.fetchTodos(completion: { [weak self] result in
                         switch result {
                         case .success(let array):
+                            print(array.count)
                             self?.presenter?.didGetCompletedTodos(array)
                         case .failure(let error):
                             self?.presenter?.onError(error)
                         }
                     })
                 } else {
+                    print("completed \(todos.count)")
                     self?.presenter?.didGetCompletedTodos(todos)
                 }
             case .failure(let error):
@@ -68,6 +70,7 @@ class TodoListInteractor: TodoListInteractorProtocol {
                         }
                     })
                 } else {
+                    print("uncompleted \(todos.count)")
                     self?.presenter?.didGetUncompletedTodos(todos)
                 }
             case .failure(let error):
@@ -81,10 +84,12 @@ class TodoListInteractor: TodoListInteractorProtocol {
 extension TodoListInteractor: RemoteManagerResponseProtocol {
     
     func didGetCompletedTodos(_ todos: [Todo]) {
+        print("interactor completed \(todos.count)")
         presenter?.didGetCompletedTodos(todos)
     }
     
     func didGetUncompletedTodos(_ todos: [Todo]) {
+        print("interactor uncompleted \(todos.count)")
         presenter?.didGetUncompletedTodos(todos)
     }
 
