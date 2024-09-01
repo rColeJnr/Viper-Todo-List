@@ -15,22 +15,22 @@ protocol TodoListViewProtocol: AnyObject {
     var presenter: TodoListPresenterProtocol? { get set }
     
     // Presenter -> View
-    func showUncompletedTodos(with todos: [Todo])
+    func showInProgressTodos(with todos: [Todo])
     
-    func showUncompletedLoading()
+    func showInProgressTodosLoading()
     
-    func hideUncompletedLoading()
+    func hideInProgressTodosLoading()
     
     func showCompletedTodos(with todos: [Todo])
     
-    func showCompletedLoading()
+    func showCompletedTodosLoading()
     
-    func hideCompletedLoading()
+    func hideCompletedTodosLoading()
     
     func showError(error: Error)
 }
-
-class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegate {
+// MARK: - VIEW
+class TodoListViewController: UIViewController {
 
     private let todoListView = TodoListView()
     var presenter: TodoListPresenterProtocol?
@@ -44,19 +44,10 @@ class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegat
         presenter?.viewDidLoad()
         todoListView.collectionView?.delegate = self
         todoListView.collectionView?.dataSource = self
-    
     }
-    
-    func navigateToShowAll(_ title: String, completed flag: Bool) {
-        let list = if flag {
-            todoCompletedList
-        } else {
-            todoInprogressList
-        }
-        presenter?.router?.createTodoShowAllViewController(from: self, with: title, for: list)
-    }
-    
 }
+
+// MARK: - COLLECTION VIEW
 
 extension TodoListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -127,6 +118,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             ) as? TodoCreateNewViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             return cell
             
         }
@@ -138,20 +130,20 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
         switch sectionType {
             
         case .completed:
-            guard let cell = collectionView.dequeueReusableCell(
+            guard collectionView.dequeueReusableCell(
                 withReuseIdentifier: TodoCompleteViewCell.cellIdentifier,
                 for: indexPath
-            ) as? TodoCompleteViewCell else {
+            ) is TodoCompleteViewCell else {
                 fatalError()
             }
             let todo = todoCompletedList[indexPath.row]
             presenter?.showTodoDetails(for: todo)
             
         case .inProgress:
-            guard let cell = collectionView.dequeueReusableCell(
+            guard collectionView.dequeueReusableCell(
                 withReuseIdentifier: todoInProgreessViewCell.cellIdentifier,
                 for: indexPath
-            ) as? todoInProgreessViewCell else {
+            ) is todoInProgreessViewCell else {
                 fatalError()
             }
             let todo = todoInprogressList[indexPath.row]
@@ -160,24 +152,23 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
         default:
             return
             // do nothing
-            
-
         }
     }
     
 }
 
+// MARK: - VIEW PROTOCOL
 extension TodoListViewController: TodoListViewProtocol {
-    func showUncompletedTodos(with todos: [Todo]) {
+    func showInProgressTodos(with todos: [Todo]) {
         todoInprogressList = todos
         todoListView.collectionView?.reloadData()
     }
     
-    func showUncompletedLoading() {
+    func showInProgressTodosLoading() {
         // not implemented yet
     }
     
-    func hideUncompletedLoading() {
+    func hideInProgressTodosLoading() {
         // not implemented yet
     }
     
@@ -186,11 +177,11 @@ extension TodoListViewController: TodoListViewProtocol {
         todoListView.collectionView?.reloadData()
     }
     
-    func showCompletedLoading() {
+    func showCompletedTodosLoading() {
         // not implemented yet
     }
     
-    func hideCompletedLoading() {
+    func hideCompletedTodosLoading() {
         // not implemented yet
     }
     
@@ -198,6 +189,26 @@ extension TodoListViewController: TodoListViewProtocol {
         print("failed to load with error: \(error.localizedDescription)")
         // not implemented yet
     }
+}
+
+// MARK: VIEW DELEGATE
+extension TodoListViewController: NavigateToShowAllViewCellDelegate, TodoCreateNewViewCellDelegate, TodoCreateViewToTodoListViewDelegate {
+   
+    func updateTodoList() {
+        presenter?.interactor?.getInProgressTodos()
+    }
     
     
+    func createNewTodo() {
+        presenter?.router?.createTodoCreateModule(from: self)
+    }
+    
+    func navigateToShowAll(_ title: String, completed flag: Bool) {
+        let list = if flag {
+            todoCompletedList
+        } else {
+            todoInprogressList
+        }
+        presenter?.router?.createTodoShowAllViewController(from: self, with: title, for: list)
+    }
 }

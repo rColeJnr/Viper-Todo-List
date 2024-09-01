@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func applicationWillTerminate(_ application: UIApplication) {
+        saveContext()
+    }
+    
+    func saveContext () {
+        let context = CoreDataManager.persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+             
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
 
 }
 

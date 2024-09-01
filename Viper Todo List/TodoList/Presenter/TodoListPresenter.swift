@@ -14,6 +14,9 @@ protocol TodoListPresenterProtocol: AnyObject {
     
     // View -> Presenter
     func viewDidLoad()
+    func getInProgressTodos()
+    func getCompletedTodos()
+    func createTodoCreateModule()
     func showTodoDetails(for todo: Todo)
 }
 
@@ -23,32 +26,44 @@ class TodoListPresenter: TodoListPresenterProtocol {
     var router: TodoListRouterProtocol?
     
     func viewDidLoad() {
-        view?.showUncompletedLoading()
-        view?.showCompletedLoading()
-        interactor?.getUncompletedTodos()
+        interactor?.getInProgressTodos()
         interactor?.getCompletedTodos()
+    }
+    
+    func getCompletedTodos() {
+        view?.showCompletedTodosLoading()
+        interactor?.getCompletedTodos()
+    }
+    
+    func getInProgressTodos() {
+        view?.showInProgressTodosLoading()
+        interactor?.getInProgressTodos()
     }
     
     func showTodoDetails(for todo: Todo) {
         router?.createTodoDetailsViewController(from: view!, for: todo)
         
     }
+    
+    func createTodoCreateModule() {
+        router?.createTodoCreateModule(from: view!)
+    }
 }
 
 extension TodoListPresenter: TodoListInteractorResponseProtocol {
     func didGetCompletedTodos(_ todos: [Todo]) {
-        view?.hideCompletedLoading()
+        view?.hideCompletedTodosLoading()
         view?.showCompletedTodos(with: todos)
     }
     
     func didGetUncompletedTodos(_ todos: [Todo]) {
-        view?.hideUncompletedLoading()
-        view?.showUncompletedTodos(with: todos)
+        view?.hideInProgressTodosLoading()
+        view?.showInProgressTodos(with: todos)
     }
     
     func onError(_ error: any Error) {
-        view?.hideCompletedLoading()
-        view?.hideUncompletedLoading()
+        view?.hideCompletedTodosLoading()
+        view?.hideInProgressTodosLoading()
         view?.showError(error: error)
     }
 }

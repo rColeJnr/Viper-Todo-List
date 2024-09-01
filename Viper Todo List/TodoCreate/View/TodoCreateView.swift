@@ -1,14 +1,19 @@
 //
-//  TodoDetailsView.swift
+//  TodoCreateView.swift
 //  Viper Todo List
 //
-//  Created by rColeJnr on 28/08/24.
+//  Created by rColeJnr on 01/09/24.
 //
 
 import UIKit
 
-class TodoDetailsView: UIView {
+protocol TodoCreateViewDelegate {
+    func createNewTodo(for todo: TodoModel)
+}
+
+class TodoCreateView: UIView {
     
+    // MARK: - VIEWS
     private let nameLabel = {
         let view = UILabel()
         view.text = "Название задачи"
@@ -52,23 +57,9 @@ class TodoDetailsView: UIView {
         return view
     }()
     
-    private let markAsComplete = {
-        var viewConfig = UIButton.Configuration.plain()
-        viewConfig.title = "Mark as Completed"
-        viewConfig.baseForegroundColor = .systemBlue
-        viewConfig.image = UIImage(systemName: "checkmark.circle")
-        viewConfig.imagePlacement = .trailing
-        viewConfig.imagePadding = 25
-        let view = UIButton(configuration: viewConfig)
-        view.titleLabel?.adjustsFontSizeToFitWidth = true
-        view.isUserInteractionEnabled = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private let dateCreated = {
         let view = UILabel()
-        view.text = "Созданно :"
+        view.text = "Созданно : "
         view.textColor = .label
         view.font = .systemFont(ofSize: 26, weight: .thin)
         view.textAlignment = .left
@@ -76,21 +67,27 @@ class TodoDetailsView: UIView {
         return view
     }()
     
-    private let deleteBtn = {
-        var viewConfig = UIButton.Configuration.bordered()
-        viewConfig.title = "Delete"
-        viewConfig.cornerStyle = .medium
-        viewConfig.baseBackgroundColor = .systemRed
-        viewConfig.baseForegroundColor = .white
-        let view = UIButton(configuration: viewConfig)
-        view.isUserInteractionEnabled = true
+    private let selectedDate = {
+        let view = UILabel()
+        view.textColor = .label
+        view.font = .systemFont(ofSize: 24, weight: .thin)
+        view.textAlignment = .left
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let saveBtn = {
+    private  let datePickerView = {
+        let view = UIDatePicker()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.datePickerMode = .dateAndTime
+        view.minimumDate = .now
+        view.preferredDatePickerStyle = .compact
+        return view
+    }()
+    
+    private let createBtn = {
         var viewConfig = UIButton.Configuration.bordered()
-        viewConfig.title = "Save"
+        viewConfig.title = "+ Create"
         viewConfig.cornerStyle = .medium
         viewConfig.baseBackgroundColor = .systemBlue
         viewConfig.baseForegroundColor = .white
@@ -100,10 +97,25 @@ class TodoDetailsView: UIView {
         return view
     }()
     
+    private let errorView = {
+        let view = UILabel()
+        view.text = "A todo must have a name and description"
+        view.textColor = .red
+        view.isHidden = true
+        view.font = .systemFont(ofSize: 22, weight: .medium)
+        view.textAlignment = .center
+        view.numberOfLines = .max
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    // MARK: - INIT
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(nameLabel, name, descriptionLabel, descriptionTF, markAsComplete, dateCreated, deleteBtn, saveBtn)
+        configDatePicker()
+        createBtn.addTarget(self, action: #selector(createBtnTarget), for: .touchDown)
+        addSubviews(errorView, nameLabel, name, descriptionLabel, descriptionTF, datePickerView, dateCreated, selectedDate, createBtn)
         addConstraints()
     }
     
@@ -111,8 +123,46 @@ class TodoDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - VIEW CONFIG
+    
+    var delegate: TodoCreateViewDelegate?
+    
+    @objc private func createBtnTarget(_ sender: UIButton) {
+        if
+            name.text.isEmpty ||
+            descriptionTF.text.isEmpty
+         {
+            self.errorView.isHidden = false
+            return
+        }
+        
+        let todo = TodoModel(name: name.text, details: descriptionTF.text, completed: false, dateCreated: datePickerView.date)
+        self.delegate?.createNewTodo(for: todo)
+    }
+    
+    @objc private func configDatePicker() {
+        datePickerView.addTarget(self, action: #selector(setDate), for: .valueChanged)
+        selectedDate.text = datePickerView.date.formatted(date: .abbreviated, time: .omitted)
+    }
+    
+    @objc private func setDate(_ sender: UIDatePicker) {
+        selectedDate.text = VtlDateFormatter.shared.dateFormatter(from: sender.date)
+    }
+    
+    func configure(with todo: TodoModel) {
+        name.text = todo.name
+        descriptionTF.text = todo.details
+        dateCreated.text = "Созданно : \(String(describing: todo.dateCreated))"
+    }
+    
     private func addConstraints() {
         NSLayoutConstraint.activate([
+            
+            errorView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            errorView.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -5),
+            errorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            errorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+        
             nameLabel.heightAnchor.constraint(equalToConstant: 30),
             nameLabel.bottomAnchor.constraint(equalTo: name.topAnchor, constant: -10),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
@@ -129,36 +179,28 @@ class TodoDetailsView: UIView {
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 8),
             
             descriptionTF.heightAnchor.constraint(equalToConstant: 280),
-            descriptionTF.bottomAnchor.constraint(equalTo: markAsComplete.topAnchor, constant: -10),
+            descriptionTF.bottomAnchor.constraint(equalTo: datePickerView.topAnchor, constant: -10),
             descriptionTF.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             descriptionTF.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
-            markAsComplete.heightAnchor.constraint(equalToConstant: 70),
-            markAsComplete.bottomAnchor.constraint(equalTo: dateCreated.topAnchor, constant: -10),
-            markAsComplete.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            markAsComplete.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            datePickerView.bottomAnchor.constraint(equalTo: dateCreated.topAnchor, constant: -10),
+            datePickerView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            dateCreated.bottomAnchor.constraint(equalTo: deleteBtn.topAnchor, constant: -25),
+            dateCreated.bottomAnchor.constraint(equalTo: createBtn.topAnchor, constant: -25),
             dateCreated.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            dateCreated.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            dateCreated.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.37),
             
-            deleteBtn.heightAnchor.constraint(equalToConstant: 80),
-            deleteBtn.widthAnchor.constraint(equalToConstant: 180),
-            deleteBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            deleteBtn.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            
-            saveBtn.heightAnchor.constraint(equalToConstant: 80),
-            saveBtn.widthAnchor.constraint(equalToConstant: 180),
-            saveBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            saveBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            selectedDate.bottomAnchor.constraint(equalTo: createBtn.topAnchor, constant: -25),
+            selectedDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            selectedDate.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.60),
+          
+            createBtn.heightAnchor.constraint(equalToConstant: 80),
+            createBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            createBtn.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            createBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
         ])
     }
-    
-    func configure(with todo: Todo) {
-        name.text = todo.name
-        descriptionTF.text = todo.details
-        dateCreated.text = "Созданно : \(VtlDateFormatter.shared.dateFormatter(from: todo.dateCreated))"
-    }
-    
+ 
 }
+

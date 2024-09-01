@@ -66,7 +66,6 @@ class todoInProgreessViewCell: UICollectionViewCell {
     private let markAsCompleted = {
         let view = UIImageView()
         view.isUserInteractionEnabled = true
-        view.image = UIImage(systemName: "checkmark.circle")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -136,6 +135,11 @@ class todoInProgreessViewCell: UICollectionViewCell {
     func configure(todo: Todo) {
         name.text = todo.name
         details.text = todo.details
-        dateCreated.text = Date.now.description
+        if todo.completed {
+            markAsCompleted.image = UIImage(systemName: "checkmark.circle.fill")
+        } else {
+            markAsCompleted.image = UIImage(systemName: "checkmark.circle")
+        }
+        dateCreated.text = VtlDateFormatter.shared.dateFormatter(from: todo.dateCreated)
     }
 }

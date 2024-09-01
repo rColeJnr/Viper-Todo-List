@@ -11,22 +11,33 @@ protocol TodoListRouterProtocol: AnyObject {
     // Presenter -> Router
     func createTodoDetailsViewController(from view: TodoListViewProtocol, for todo: Todo)
     func createTodoShowAllViewController(from view: TodoListViewProtocol, with title: String, for list: [Todo])
+    func createTodoCreateModule(from view: TodoListViewProtocol)
+    
     func createModule() -> TodoListViewController
     
 }
 class TodoListRouter: TodoListRouterProtocol {
     
+    func createTodoCreateModule(from view: any TodoListViewProtocol) {
+        let createVc = TodoCreateRouter().createModule()
+    
+        if let sourceView = view as? TodoListViewController {
+            createVc.delegate = sourceView.self
+            sourceView.navigationController?.pushViewController(createVc, animated: false)
+        }
+    }
+        
     func createTodoDetailsViewController(from view: TodoListViewProtocol, for todo: Todo) {
         let detailsVC = TodoDetailsRouter().createModule(for: todo)
         
-        if let sourceView = view as? UIViewController {
+        if let sourceView = view as? TodoListViewController {
             sourceView.navigationController?.pushViewController(detailsVC, animated: true)
         }
     }
     
     func createTodoShowAllViewController(from view: TodoListViewProtocol, with title: String, for list: [Todo]) {
         let showAllVC = TodoShowAllRouter().createModule(with: title, for: list)
-        if let sourceView = view as? UIViewController {
+        if let sourceView = view as? TodoListViewController {
             sourceView.navigationController?.pushViewController(showAllVC, animated: true)
         }
     }

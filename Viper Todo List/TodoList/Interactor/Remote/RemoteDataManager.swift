@@ -19,7 +19,7 @@ protocol RemoteManagerResponseProtocol {
     // RemoteManager -> Interactor
     // Interactor -> Presenter
     func didGetCompletedTodos(_ todos: [Todo])
-    func didGetUncompletedTodos(_ todos: [Todo])
+    func didGetInProgressTodos(_ todos: [Todo])
     func onError(_ error: Error)
 }
 
@@ -46,7 +46,7 @@ class RemoteDataManager: RemoteManagerProtocol {
                     switch result {
                     case .success(let todos):
                         self.remoteRequestHandler?.didGetCompletedTodos(todos.filter({it in it.completed}))
-                        self.remoteRequestHandler?.didGetUncompletedTodos(todos.filter({it in !it.completed}))
+                        self.remoteRequestHandler?.didGetInProgressTodos(todos.filter({it in !it.completed}))
                     case .failure(let error):
                         self.remoteRequestHandler?.onError(error)
                     }
@@ -61,7 +61,9 @@ class RemoteDataManager: RemoteManagerProtocol {
             return completion(.failure(error!))
         }
         
-        CoreDataManager.persistentContainer.performBackgroundTask { context in
+        let persistentContainer = CoreDataManager.persistentContainer
+        
+        persistentContainer.performBackgroundTask { context in
             let result = self.serializeDummyTodo(fromJson: jsonData, into: context)
             
             do {
@@ -74,7 +76,7 @@ class RemoteDataManager: RemoteManagerProtocol {
             switch result {
             case .success(let array):
                 let todoIds = array.map { return $0.objectID }
-                let viewContext =  CoreDataManager.persistentContainer.viewContext
+                let viewContext = persistentContainer.viewContext
                 let viewContextTodos = todoIds.map { return viewContext.object(with: $0) } as! [Todo]
                 completion(.success(viewContextTodos))
             case .failure:
@@ -126,15 +128,9 @@ class RemoteDataManager: RemoteManagerProtocol {
         context.performAndWait({
             todo = Todo(context: context)
             todo.name = name
+            todo.dateCreated = Date.now
             todo.completed = completed
         })
         return todo
     }
-}
-
-enum VtlError: Error {
-    case InvalidJsonData
-    case FailedToParse
-    case FailedToSaveToCoreData
-    case CouldNotSaveObject
 }

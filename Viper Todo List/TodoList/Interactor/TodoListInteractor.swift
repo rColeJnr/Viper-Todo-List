@@ -14,7 +14,7 @@ protocol TodoListInteractorProtocol {
     
     // Presenter -> Interactor
     func getCompletedTodos()
-    func getUncompletedTodos()
+    func getInProgressTodos()
 }
 
 protocol TodoListInteractorResponseProtocol {
@@ -55,8 +55,8 @@ class TodoListInteractor: TodoListInteractorProtocol {
         })
     }
     
-    func getUncompletedTodos() {
-        localDataManager?.getUncompletedTodos(completion: { [weak self] todoResult in
+    func getInProgressTodos() {
+        localDataManager?.getInProgreeTodos(completion: { [weak self] todoResult in
             switch todoResult {
             case .success(let todos):
                 if todos.isEmpty {
@@ -85,7 +85,7 @@ extension TodoListInteractor: RemoteManagerResponseProtocol {
         presenter?.didGetCompletedTodos(todos)
     }
     
-    func didGetUncompletedTodos(_ todos: [Todo]) {
+    func didGetInProgressTodos(_ todos: [Todo]) {
         presenter?.didGetUncompletedTodos(todos)
     }
 

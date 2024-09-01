@@ -134,6 +134,6 @@ class TodoCompleteViewCell: UICollectionViewCell {
     func configure(todo: Todo) {
         name.text = todo.name
         details.text = todo.details
-        dateCompleted.text = ("Дата выполнения : \(todo.dateCreated)")
+        dateCompleted.text = ("Дата выполнения : \(String(describing: todo.dateCreated))")
     }
 }

@@ -61,13 +61,4 @@ class TodoCompleteRowViewCell: UICollectionViewCell {
            
         ])
     }
-    
-
-//    /// Bind Todo item to UI
-//    func configure(todo: Todo) {
-//        name.text = todo.name
-//        details.text = todo.details
-//        dateCreated.text = todo.dateCreated
-//        statusSwitch.isOn = todo.status
-//    }
 }
