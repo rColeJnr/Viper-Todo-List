@@ -31,6 +31,7 @@ class TodoListRouter: TodoListRouterProtocol {
         let detailsVC = TodoDetailsRouter().createModule(for: todo)
         
         if let sourceView = view as? TodoListViewController {
+            detailsVC.delegate = sourceView.self
             sourceView.navigationController?.pushViewController(detailsVC, animated: true)
         }
     }

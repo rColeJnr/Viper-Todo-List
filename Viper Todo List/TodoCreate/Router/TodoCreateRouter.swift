@@ -18,10 +18,8 @@ class TodoCreateRouter: TodoCreateRouterProtocol {
         var presenter: TodoCreatePresenterProtocol & TodoCreateInteractorResponseProtocol = TodoCreatePresenter()
         var interactor: TodoCreateInteractorProtocol & TodoCreateLocalDataManagerResponseProtocol  = TodoCreateInteractor()
         var dataManager: TodoCreateLocalDataManagerProtocol = TodoCreateLocalDataManager()
-        let router: TodoCreateRouterProtocol = TodoCreateRouter()
         view.presenter = presenter
         presenter.view = view
-        presenter.router = router
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.dataManager = dataManager

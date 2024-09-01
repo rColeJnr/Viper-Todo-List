@@ -16,13 +16,17 @@ class TodoDetailsRouter: TodoDetailsRouterProtocol {
     
     func createModule(for todo: Todo) -> TodoDetailsViewController {
         let view = TodoDetailsViewController()
-        let presenter: TodoDetailsPresenterProtocol = TodoDetailsPresenter()
-        let router: TodoDetailsRouterProtocol = TodoDetailsRouter()
+        var interactor: TodoDetailsInteractorProtocol & TodoDetailsLocalDataManagerResponseProtocol = TodoDetailsInteractor()
+        let presenter: TodoDetailsPresenterProtocol & TodoDetailsInteractorResponseProtocol = TodoDetailsPresenter()
+        var dataManager: TodoDetailsLocalDataManagerProtocol = TodoDetailsLocalDataManager()
+        view.title = "Описание"
         view.presenter = presenter
+        interactor.dataManager = dataManager
+        interactor.presenter = presenter
+        presenter.interactor = interactor
         presenter.view = view
         presenter.todo = todo
-        presenter.router = router
-        view.title = "Описание"
+        dataManager.responseHandler = interactor
         return view
     }
 }

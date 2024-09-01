@@ -14,7 +14,7 @@ protocol TodoCreateViewProtocol: AnyObject {
 }
 
 protocol TodoCreateViewToTodoListViewDelegate {
-    func updateTodoList()
+    func updateInProgressList()
 }
 
 class TodoCreateViewController: UIViewController {
@@ -34,8 +34,7 @@ class TodoCreateViewController: UIViewController {
 extension TodoCreateViewController: TodoCreateViewProtocol, TodoCreateViewDelegate {
     
     func didCreateTodo() {
-        print("Did create todo")
-        delegate?.updateTodoList()
+        delegate?.updateInProgressList()
     }
     
     func createNewTodo(for todo: TodoModel) {

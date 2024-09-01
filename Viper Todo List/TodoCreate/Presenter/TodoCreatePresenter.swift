@@ -10,7 +10,6 @@ import Foundation
 protocol TodoCreatePresenterProtocol {
     var view: TodoCreateViewProtocol? { get set }
     var interactor: TodoCreateInteractorProtocol? { get set }
-    var router: TodoCreateRouterProtocol? { get set }
     
     func createTodo(todo: TodoModel)
 }
@@ -21,8 +20,6 @@ class TodoCreatePresenter: TodoCreatePresenterProtocol {
     
     var interactor: TodoCreateInteractorProtocol?
     
-    var router: TodoCreateRouterProtocol?
-    
     func createTodo(todo: TodoModel) {
         interactor?.createTodo(todo: todo)
     }
@@ -30,7 +27,6 @@ class TodoCreatePresenter: TodoCreatePresenterProtocol {
 
 extension TodoCreatePresenter: TodoCreateInteractorResponseProtocol {
     func didCreateTodo() {
-        print("problema de nao saber")
         view?.didCreateTodo()
     }
 }

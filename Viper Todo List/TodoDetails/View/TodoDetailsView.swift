@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol TodoDetailsViewDelegate {
+    func updateTodo(todo: Todo)
+    func deleteTodo(todo: Todo)
+}
+
 class TodoDetailsView: UIView {
     
+    // MARK: - VIEWS
     private let nameLabel = {
         let view = UILabel()
         view.text = "Название задачи"
@@ -54,9 +60,7 @@ class TodoDetailsView: UIView {
     
     private let markAsComplete = {
         var viewConfig = UIButton.Configuration.plain()
-        viewConfig.title = "Mark as Completed"
         viewConfig.baseForegroundColor = .systemBlue
-        viewConfig.image = UIImage(systemName: "checkmark.circle")
         viewConfig.imagePlacement = .trailing
         viewConfig.imagePadding = 25
         let view = UIButton(configuration: viewConfig)
@@ -100,15 +104,79 @@ class TodoDetailsView: UIView {
         return view
     }()
     
+    private let errorView = {
+        let view = UILabel()
+        view.text = "No changes made"
+        view.textColor = .red
+        view.font = .systemFont(ofSize: 22, weight: .medium)
+        view.textAlignment = .center
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    // MARK: - INIT
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(nameLabel, name, descriptionLabel, descriptionTF, markAsComplete, dateCreated, deleteBtn, saveBtn)
+        markAsComplete.addTarget(self, action: #selector(onMarkAsComplete), for: .touchDown)
+        saveBtn.addTarget(self, action: #selector(onSaveBtn), for: .touchDown)
+        deleteBtn.addTarget(self, action: #selector(onDeleteBtn), for: .touchDown)
+        addSubviews(errorView, nameLabel, name, descriptionLabel, descriptionTF, markAsComplete, dateCreated, deleteBtn, saveBtn)
         addConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - VIEW CONFIG
+    
+    var delegate: TodoDetailsViewDelegate?
+    
+    @objc private func onMarkAsComplete(_ sender: UIButton) {
+        self.isCompleted = !self.isCompleted
+        if isCompleted {
+            markAsComplete.configuration?.title = "Mark as In Progress"
+            markAsComplete.configuration?.image = UIImage(systemName: "checkmark.circle.fill")
+        } else {
+            markAsComplete.configuration?.title = "Mark as Completed"
+            markAsComplete.configuration?.image = UIImage(systemName: "checkmark.circle")
+        }
+    }
+    
+    @objc private func onSaveBtn(_ sender: UIButton) {
+        if name.text != todo.name || descriptionTF.text != todo.details || isCompleted != todo.completed {
+            todo.name = name.text
+            todo.details = descriptionTF.text
+            todo.completed = isCompleted
+            delegate?.updateTodo(todo: todo)
+        } else {
+            errorView.isHidden = false
+        }
+    }
+    
+    @objc private func onDeleteBtn(_ sender: UIButton) {
+        delegate?.deleteTodo(todo: todo)
+    }
+    
+    private var isCompleted: Bool!
+    private var todo: Todo!
+    /// Bind UI with data
+    func configure(with todo: Todo) {
+        self.todo = todo
+        self.isCompleted = todo.completed
+        name.text = todo.name
+        descriptionTF.text = todo.details
+        if isCompleted {
+            markAsComplete.configuration?.title = "Mark as In Progress"
+            markAsComplete.configuration?.image = UIImage(systemName: "checkmark.circle.fill")
+        } else {
+            markAsComplete.configuration?.title = "Mark as Completed"
+            markAsComplete.configuration?.image = UIImage(systemName: "checkmark.circle")
+        }
+        dateCreated.text = "Созданно : \(VtlDateFormatter.shared.dateFormatter(from: todo.dateCreated))"
     }
     
     private func addConstraints() {
@@ -154,11 +222,4 @@ class TodoDetailsView: UIView {
             
         ])
     }
-    
-    func configure(with todo: Todo) {
-        name.text = todo.name
-        descriptionTF.text = todo.details
-        dateCreated.text = "Созданно : \(VtlDateFormatter.shared.dateFormatter(from: todo.dateCreated))"
-    }
-    
 }

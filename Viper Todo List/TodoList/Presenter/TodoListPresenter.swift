@@ -15,7 +15,6 @@ protocol TodoListPresenterProtocol: AnyObject {
     // View -> Presenter
     func viewDidLoad()
     func getInProgressTodos()
-    func getCompletedTodos()
     func createTodoCreateModule()
     func showTodoDetails(for todo: Todo)
 }
@@ -27,11 +26,6 @@ class TodoListPresenter: TodoListPresenterProtocol {
     
     func viewDidLoad() {
         interactor?.getInProgressTodos()
-        interactor?.getCompletedTodos()
-    }
-    
-    func getCompletedTodos() {
-        view?.showCompletedTodosLoading()
         interactor?.getCompletedTodos()
     }
     
