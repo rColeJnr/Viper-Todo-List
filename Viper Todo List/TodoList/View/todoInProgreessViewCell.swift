@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoUncompleteViewCell: UICollectionViewCell {
+class todoInProgreessViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoUncompleteViewCell"
     

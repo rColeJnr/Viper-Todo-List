@@ -34,7 +34,7 @@ class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegat
 
     private let todoListView = TodoListView()
     var presenter: TodoListPresenterProtocol?
-    var todoUncompletedList: [Todo] = []
+    var todoInprogressList: [Todo] = []
     var todoCompletedList: [Todo] = []
     
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ class TodoListViewController: UIViewController, NavigateToShowAllViewCellDelegat
         let list = if flag {
             todoCompletedList
         } else {
-            todoUncompletedList
+            todoInprogressList
         }
         presenter?.router?.createTodoShowAllViewController(from: self, with: title, for: list)
     }
@@ -67,11 +67,9 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let sectionType = TodoListSectionType.allCases[section]
         switch sectionType {
-        case .uncompleted:
-            print("count uncompleted: \(todoUncompletedList.count)")
-            return todoUncompletedList.count
+        case .inProgress:
+            return todoInprogressList.count
         case .completed:
-            print("count completed: \(todoCompletedList.count)")
             return todoCompletedList.count
         default:
             return 1
@@ -92,14 +90,14 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             cell.configure(todo: todoCompletedList[indexPath.row])
             return cell
             
-        case .uncompleted:
+        case .inProgress:
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: TodoUncompleteViewCell.cellIdentifier,
+                withReuseIdentifier: todoInProgreessViewCell.cellIdentifier,
                 for: indexPath
-            ) as? TodoUncompleteViewCell else {
+            ) as? todoInProgreessViewCell else {
                 fatalError()
             }
-            cell.configure(todo: todoUncompletedList[indexPath.row])
+            cell.configure(todo: todoInprogressList[indexPath.row])
             return cell
         
         case .completedRow:
@@ -112,11 +110,11 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             cell.delegate = self
             return cell
         
-        case .uncompletedRow:
+        case .inProgressRow:
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: TodoUncompleteRowViewCell.cellIdentifier,
+                withReuseIdentifier: TodoInProgressRowViewCell.cellIdentifier,
                 for: indexPath
-            ) as? TodoUncompleteRowViewCell else {
+            ) as? TodoInProgressRowViewCell else {
                 fatalError()
             }
             cell.delegate = self
@@ -136,12 +134,34 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.dequeueReusableCell(withReuseIdentifier: TodoCompleteViewCell.cellIdentifier, for: indexPath) is TodoCompleteViewCell {
-                let todo = todoCompletedList[indexPath.row]
-                presenter?.showTodoDetails(for: todo)
-        } else {
-            let todo = todoUncompletedList[indexPath.row]
+        let sectionType = TodoListSectionType.allCases[indexPath.section]
+        switch sectionType {
+            
+        case .completed:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: TodoCompleteViewCell.cellIdentifier,
+                for: indexPath
+            ) as? TodoCompleteViewCell else {
+                fatalError()
+            }
+            let todo = todoCompletedList[indexPath.row]
             presenter?.showTodoDetails(for: todo)
+            
+        case .inProgress:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: todoInProgreessViewCell.cellIdentifier,
+                for: indexPath
+            ) as? todoInProgreessViewCell else {
+                fatalError()
+            }
+            let todo = todoInprogressList[indexPath.row]
+            presenter?.showTodoDetails(for: todo)
+        
+        default:
+            return
+            // do nothing
+            
+
         }
     }
     
@@ -149,8 +169,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension TodoListViewController: TodoListViewProtocol {
     func showUncompletedTodos(with todos: [Todo]) {
-        print("view uncompleted \(todos.count)")
-        todoUncompletedList = todos
+        todoInprogressList = todos
         todoListView.collectionView?.reloadData()
     }
     

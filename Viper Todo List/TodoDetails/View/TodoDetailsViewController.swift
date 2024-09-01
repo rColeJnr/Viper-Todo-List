@@ -16,7 +16,7 @@ protocol TodoDetailsViewProtocol: AnyObject {
 
 class TodoDetailsViewController: UIViewController, TodoDetailsViewProtocol {
     
-    private var detailsView = TodoDetailsView()
+    private let detailsView = TodoDetailsView()
     var presenter: TodoDetailsPresenterProtocol?
 
     override func viewDidLoad() {

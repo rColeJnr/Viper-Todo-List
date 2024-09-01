@@ -41,8 +41,9 @@ final class TodoListView: UIView {
             return self.createSection(for: sectionIndex)
         }
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(TodoUncompleteRowViewCell.self, forCellWithReuseIdentifier: TodoUncompleteRowViewCell.cellIdentifier)
-        collectionView.register(TodoUncompleteViewCell.self, forCellWithReuseIdentifier: TodoUncompleteViewCell.cellIdentifier)
+        collectionView.isPagingEnabled = true
+        collectionView.register(TodoInProgressRowViewCell.self, forCellWithReuseIdentifier: TodoInProgressRowViewCell.cellIdentifier)
+        collectionView.register(todoInProgreessViewCell.self, forCellWithReuseIdentifier: todoInProgreessViewCell.cellIdentifier)
         collectionView.register(TodoCompleteViewCell.self, forCellWithReuseIdentifier: TodoCompleteViewCell.cellIdentifier)
         collectionView.register(TodoCompleteRowViewCell.self, forCellWithReuseIdentifier: TodoCompleteRowViewCell.cellIdentifier)
         collectionView.register(TodoCreateNewViewCell.self, forCellWithReuseIdentifier: TodoCreateNewViewCell.cellIdentifier)
@@ -53,10 +54,10 @@ final class TodoListView: UIView {
     private func createSection(for sectionIndex: Int) -> NSCollectionLayoutSection {
         let sectionTypes = TodoListSectionType.allCases
         switch sectionTypes[sectionIndex] {
-        case .uncompletedRow:
+        case .inProgressRow:
             return createUncompletedRowSection()
-        case .uncompleted:
-            return createUncompletedSection()
+        case .inProgress:
+            return createInProgressSection()
         case .completedRow:
             return createCompletedRowSection()
         case .completed:
@@ -88,8 +89,8 @@ final class TodoListView: UIView {
 
 enum TodoListSectionType: CaseIterable {
     // It's ordered in desired ViewSection order
-    case uncompletedRow
-    case uncompleted
+    case inProgressRow
+    case inProgress
     case completedRow
     case completed
     case createNew
@@ -97,7 +98,7 @@ enum TodoListSectionType: CaseIterable {
 
 extension TodoListView {
     
-    func createUncompletedSection() -> NSCollectionLayoutSection {
+    func createInProgressSection() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         )
        

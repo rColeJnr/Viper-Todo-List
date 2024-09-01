@@ -15,7 +15,6 @@ protocol TodoListRouterProtocol: AnyObject {
     
 }
 class TodoListRouter: TodoListRouterProtocol {
-    weak var viewController: UIViewController?
     
     func createTodoDetailsViewController(from view: TodoListViewProtocol, for todo: Todo) {
         let detailsVC = TodoDetailsRouter().createModule(for: todo)
@@ -48,7 +47,6 @@ class TodoListRouter: TodoListRouterProtocol {
         interactor.remoteDataManager = remoteDataManager
         remoteDataManager.remoteRequestHandler = interactor
         view.title = "Задачи"
-        self.viewController = view
         return view
     }
 }

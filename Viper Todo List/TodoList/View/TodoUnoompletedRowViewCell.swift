@@ -8,7 +8,7 @@
 import UIKit
 
 
-class TodoUncompleteRowViewCell: UICollectionViewCell {
+class TodoInProgressRowViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoUncompleteRowViewCell"
     public var delegate: NavigateToShowAllViewCellDelegate?

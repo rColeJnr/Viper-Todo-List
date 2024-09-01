@@ -22,8 +22,8 @@ class TodoShowAllView: UIView {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(TodoUncompleteViewCell.self,
-                                forCellWithReuseIdentifier: TodoUncompleteViewCell.cellIdentifier)
+        collectionView.register(todoInProgreessViewCell.self,
+                                forCellWithReuseIdentifier: todoInProgreessViewCell.cellIdentifier)
         return collectionView
     }()
     
@@ -72,7 +72,7 @@ extension TodoShowAllView: UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodoUncompleteViewCell.cellIdentifier, for: indexPath) as? TodoUncompleteViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: todoInProgreessViewCell.cellIdentifier, for: indexPath) as? todoInProgreessViewCell else {
             fatalError("Failed to create show all view cell")
         }
         cell.configure(todo: todoList[indexPath.row])
