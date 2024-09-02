@@ -34,13 +34,20 @@ class TodoShowAllView: UIView {
         return view
     }()
     
+    private let emptyView = {
+        let view = UIImageView()
+        view.image = .emptylist
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(indicatorView, collectionView)
+        addSubviews(indicatorView, collectionView, emptyView)
         indicatorView.startAnimating()
         addConstraints()
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -50,12 +57,28 @@ class TodoShowAllView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func showEmptyView() {
+        emptyView.isHidden = false
+    }
+    
+    func startAnimatingIndicatorView() {
+        indicatorView.startAnimating()
+    }
+    
+    func stopAnimatingIndicatorView() {
+        indicatorView.stopAnimating()
+    }
+    
     private func addConstraints() {
         NSLayoutConstraint.activate([
             indicatorView.heightAnchor.constraint(equalToConstant: 100),
             indicatorView.widthAnchor.constraint(equalToConstant: 100),
             indicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
             indicatorView.centerYAnchor.constraint(equalTo: centerYAnchor),
+
+            
+            emptyView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            emptyView.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),

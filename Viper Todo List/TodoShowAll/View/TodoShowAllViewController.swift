@@ -24,6 +24,7 @@ class TodoShowAllViewController: UIViewController, TodoShowAllViewDelegate, Todo
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         todoShowAllView.delegate = self
+        todoShowAllView.startAnimatingIndicatorView()
         setupView(todoShowAllView)
         presenter?.viewDidLoad()
     }
@@ -33,7 +34,12 @@ class TodoShowAllViewController: UIViewController, TodoShowAllViewDelegate, Todo
     }
     
     func showTodoList(for list: [Todo]) {
-        todoShowAllView.todoList = list
+        todoShowAllView.stopAnimatingIndicatorView()
+        if list.isEmpty {
+            todoShowAllView.showEmptyView()
+        } else {
+            todoShowAllView.todoList = list
+        }
     }
     
 }
