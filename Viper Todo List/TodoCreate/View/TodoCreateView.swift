@@ -113,6 +113,7 @@ class TodoCreateView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .systemBackground
         configDatePicker()
         createBtn.addTarget(self, action: #selector(createBtnTarget), for: .touchDown)
         addSubviews(errorView, nameLabel, name, descriptionLabel, descriptionTF, datePickerView, dateCreated, selectedDate, createBtn)

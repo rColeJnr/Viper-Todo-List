@@ -25,6 +25,7 @@ class TodoCreateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         todoCreateView.delegate = self
         setupView(todoCreateView)
     }
