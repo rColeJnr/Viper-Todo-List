@@ -38,8 +38,6 @@ class TodoListInteractor: TodoListInteractorProtocol {
                 case .success(let todos):
                     self?.presenter?.didGetCompletedTodos(todos) //Update completed list
                     self?.presenter?.didGeInProgressTodos(todos) // Update inProgress list
-                    print("did load initial")
-                    VtlUserDefaults.shared.setDidLoadInitialJson()
                 case .failure(let error):
                     self?.presenter?.onError(error)
                 }

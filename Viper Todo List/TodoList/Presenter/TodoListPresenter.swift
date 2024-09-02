@@ -24,11 +24,15 @@ class TodoListPresenter: TodoListPresenterProtocol {
     var interactor: TodoListInteractorProtocol?
     var router: TodoListRouterProtocol?
     
+    // Fetch data and update both list on viewDidLoad(), onUpdateTodo() and onDeleteTodo()
     func viewDidLoad() {
+        view?.showInProgressTodosLoading()
+        view?.showCompletedTodosLoading()
         interactor?.getInProgressTodos()
         interactor?.getCompletedTodos()
     }
     
+    // Fetch data and update inProgress list after creating a new todo
     func getInProgressTodos() {
         view?.showInProgressTodosLoading()
         interactor?.getInProgressTodos()

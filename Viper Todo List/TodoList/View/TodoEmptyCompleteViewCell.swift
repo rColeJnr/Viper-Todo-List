@@ -1,21 +1,21 @@
 //
-//  TodoCollectionViewCell.swift
+//  TodoEmptyCompletedViewCell.swift
 //  Viper Todo List
 //
-//  Created by rColeJnr on 27/08/24.
+//  Created by rColeJnr on 02/09/24.
 //
 
 import UIKit
 
-class TodoCompleteViewCell: UICollectionViewCell {
+class TodoEmptyCompleteViewCell: UICollectionViewCell {
     
-    static let cellIdentifier = "TodoCompleteViewCell"
+    static let cellIdentifier = "TodoEmptyCompleteViewCell"
     
     private let name: UILabel = {
         let view = UILabel()
-        view.text = "Название"
+        view.text = "Empty view"
         view.adjustsFontForContentSizeCategory = true
-        view.font = .systemFont(ofSize: 20, weight: .semibold)
+        view.font = .systemFont(ofSize: 20, weight: .thin)
         view.textColor = .label
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -23,7 +23,7 @@ class TodoCompleteViewCell: UICollectionViewCell {
 
     private let details = {
        let view = UILabel()
-       view.text = "Tap to add description..."
+       view.text = "Your completed Todos will show here"
        view.font = .systemFont(ofSize: 20, weight: .thin)
        view.textColor = .label
         view.numberOfLines = 1
@@ -48,7 +48,7 @@ class TodoCompleteViewCell: UICollectionViewCell {
     
     private let dateCreated = {
        let view = UILabel()
-       view.text = "Дата создания : "
+       view.text = "Дата создания : 25/08/2024"
        view.font = .systemFont(ofSize: 18, weight: .thin)
        view.textColor = .label
        view.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +58,7 @@ class TodoCompleteViewCell: UICollectionViewCell {
     
     private let dateCompleted = {
        let view = UILabel()
-       view.text = "Дата выполнения"
+       view.text = "Дата выполнения: 02/09/2024"
        view.font = .systemFont(ofSize: 18, weight: .thin)
        view.textColor = .label
        view.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +78,7 @@ class TodoCompleteViewCell: UICollectionViewCell {
         contentView.backgroundColor = .secondarySystemBackground
         contentView.addSubviews(verticalDivider, name, dateCreated, dateCompleted, horizontalDivider, details, markAsUncompleted)
         addConstraints()
+        contentView.alpha = 0.5
         contentView.layer.cornerRadius = 15
     }
     
@@ -121,21 +122,5 @@ class TodoCompleteViewCell: UICollectionViewCell {
             markAsUncompleted.trailingAnchor.constraint(equalTo: verticalDivider.leadingAnchor, constant: -10),
             
         ])
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        name.text = nil
-        details.text = nil
-        dateCompleted.text = nil
-        dateCompleted.text = nil
-    }
-    
-    /// Bind Todo item to UI
-    func configure(todo: Todo) {
-        name.text = todo.name
-        details.text = todo.details
-        dateCreated.text = ("Дата создания : \(VtlDateFormatter.shared.dateFormatter(from: todo.dateCreated))")
-        dateCompleted.text = ("Дата выполнения : \(VtlDateFormatter.shared.dateFormatter(from: todo.dateCompleted))")
     }
 }

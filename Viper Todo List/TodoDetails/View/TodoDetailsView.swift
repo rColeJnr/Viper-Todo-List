@@ -151,6 +151,11 @@ class TodoDetailsView: UIView {
             todo.name = name.text
             todo.details = descriptionTF.text
             todo.completed = isCompleted
+            if isCompleted {
+                todo.dateCompleted = Date.now
+            } else {
+                todo.dateCompleted = nil
+            }
             delegate?.updateTodo(todo: todo)
         } else {
             errorView.isHidden = false

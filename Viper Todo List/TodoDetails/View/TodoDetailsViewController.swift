@@ -44,7 +44,19 @@ extension TodoDetailsViewController: TodoDetailsViewProtocol, TodoDetailsViewDel
     }
     
     func deleteTodo(todo: Todo) {
-        presenter?.interactor?.deleteTodo(todo: todo)
+        let ac = UIAlertController(
+            title: "Delete \"\(todo.name!)\"",
+            message: "Are you sure you want to delete this todo?",
+            preferredStyle: .actionSheet
+        )
+        let cancelAction = UIAlertAction(title: "No", style: .default)
+        ac.addAction(cancelAction)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive, handler: { (action) -> Void in
+            self.presenter?.interactor?.deleteTodo(todo: todo)
+        })
+        ac.addAction(deleteAction)
+        self.present(ac, animated: true, completion: nil)
+        
     }
     
     func showTodoDetails(for todo: Todo) {

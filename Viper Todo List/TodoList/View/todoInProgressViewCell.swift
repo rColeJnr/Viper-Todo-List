@@ -7,7 +7,7 @@
 
 import UIKit
 
-class todoInProgreessViewCell: UICollectionViewCell {
+class todoInProgressViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoUncompleteViewCell"
     
@@ -62,7 +62,6 @@ class todoInProgreessViewCell: UICollectionViewCell {
        return view
     }()
 
-    
     private let markAsCompleted = {
         let view = UIImageView()
         view.isUserInteractionEnabled = true

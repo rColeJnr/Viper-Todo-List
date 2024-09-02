@@ -43,6 +43,7 @@ class RemoteDataManager: RemoteManagerProtocol {
                 OperationQueue.main.addOperation {
                     switch result {
                     case .success(let todos):
+                        VtlUserDefaults.shared.setDidLoadInitialJson()
                         self.remoteRequestHandler?.didGetTodos(todos)
                     case .failure(let error):
                         self.remoteRequestHandler?.onError(error)
