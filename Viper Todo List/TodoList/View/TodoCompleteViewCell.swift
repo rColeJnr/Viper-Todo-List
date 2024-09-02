@@ -48,7 +48,7 @@ class TodoCompleteViewCell: UICollectionViewCell {
     
     private let dateCreated = {
        let view = UILabel()
-       view.text = "Дата создания : 18/08/2024"
+       view.text = "Дата создания : "
        view.font = .systemFont(ofSize: 18, weight: .thin)
        view.textColor = .label
        view.translatesAutoresizingMaskIntoConstraints = false
@@ -134,6 +134,7 @@ class TodoCompleteViewCell: UICollectionViewCell {
     func configure(todo: Todo) {
         name.text = todo.name
         details.text = todo.details
-        dateCompleted.text = ("Дата выполнения : \(String(describing: todo.dateCreated))")
+        dateCreated.text = ("Дата создания : \(VtlDateFormatter.shared.dateFormatter(from: todo.dateCreated))")
+        dateCompleted.text = ("Дата выполнения : \(VtlDateFormatter.shared.dateFormatter(from: todo.dateCompleted))")
     }
 }

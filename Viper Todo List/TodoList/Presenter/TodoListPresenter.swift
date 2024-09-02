@@ -50,7 +50,7 @@ extension TodoListPresenter: TodoListInteractorResponseProtocol {
         view?.showCompletedTodos(with: todos)
     }
     
-    func didGetUncompletedTodos(_ todos: [Todo]) {
+    func didGeInProgressTodos(_ todos: [Todo]) {
         view?.hideInProgressTodosLoading()
         view?.showInProgressTodos(with: todos)
     }

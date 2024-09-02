@@ -18,8 +18,7 @@ protocol RemoteManagerProtocol {
 protocol RemoteManagerResponseProtocol {
     // RemoteManager -> Interactor
     // Interactor -> Presenter
-    func didGetCompletedTodos(_ todos: [Todo])
-    func didGetInProgressTodos(_ todos: [Todo])
+    func didGetTodos(_ todos: [Todo])
     func onError(_ error: Error)
 }
 
@@ -39,14 +38,12 @@ class RemoteDataManager: RemoteManagerProtocol {
         }
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request, completionHandler: { (data, _, error) -> Void in
-            //                 Print json response
      
             self.processTodosRequest(data: data, error: error, completion: { result in
                 OperationQueue.main.addOperation {
                     switch result {
                     case .success(let todos):
-                        self.remoteRequestHandler?.didGetCompletedTodos(todos.filter({it in it.completed}))
-                        self.remoteRequestHandler?.didGetInProgressTodos(todos.filter({it in !it.completed}))
+                        self.remoteRequestHandler?.didGetTodos(todos)
                     case .failure(let error):
                         self.remoteRequestHandler?.onError(error)
                     }
@@ -129,6 +126,7 @@ class RemoteDataManager: RemoteManagerProtocol {
             todo = Todo(context: context)
             todo.name = name
             todo.dateCreated = Date.now
+            todo.dateCompleted = Date.now
             todo.completed = completed
         })
         return todo

@@ -20,7 +20,7 @@ protocol TodoListInteractorProtocol {
 protocol TodoListInteractorResponseProtocol {
     // Interactor -> Presenter
     func didGetCompletedTodos(_ todos: [Todo])
-    func didGetUncompletedTodos(_ todos: [Todo])
+    func didGeInProgressTodos(_ todos: [Todo])
     func onError(_ error: Error)
 }
 
@@ -31,24 +31,24 @@ class TodoListInteractor: TodoListInteractorProtocol {
     var localDataManager: LocalDataManagerProtocol?
     var remoteDataManager: RemoteManagerProtocol?
     
-    // We must only fetch dummy json on first run, this code doesnt' work like that
     func getCompletedTodos() {
+        if VtlUserDefaults.shared.didLoadInitialJson() {
+            remoteDataManager?.fetchTodos(completion: { [weak self] result in
+                switch result {
+                case .success(let todos):
+                    self?.presenter?.didGetCompletedTodos(todos) //Update completed list
+                    self?.presenter?.didGeInProgressTodos(todos) // Update inProgress list
+                    print("did load initial")
+                    VtlUserDefaults.shared.setDidLoadInitialJson()
+                case .failure(let error):
+                    self?.presenter?.onError(error)
+                }
+            })
+        }
         localDataManager?.getCompletedTodos(completion: { [weak self] todoResult in
             switch todoResult {
             case .success(let todos):
-                if todos.isEmpty {
-                    self?.remoteDataManager?.fetchTodos(completion: { [weak self] result in
-                        switch result {
-                        case .success(let array):
-                            print(array.count)
-                            self?.presenter?.didGetCompletedTodos(array)
-                        case .failure(let error):
-                            self?.presenter?.onError(error)
-                        }
-                    })
-                } else {
-                    self?.presenter?.didGetCompletedTodos(todos)
-                }
+                self?.presenter?.didGetCompletedTodos(todos)
             case .failure(let error):
                 self?.presenter?.onError(error)
             }
@@ -56,39 +56,25 @@ class TodoListInteractor: TodoListInteractorProtocol {
     }
     
     func getInProgressTodos() {
-        localDataManager?.getInProgreeTodos(completion: { [weak self] todoResult in
+        localDataManager?.getInProgressTodos(completion: { [weak self] todoResult in
             switch todoResult {
             case .success(let todos):
-                if todos.isEmpty {
-                    self?.remoteDataManager?.fetchTodos(completion: { [weak self] result in
-                        switch result {
-                        case .success(let array):
-                            self?.presenter?.didGetUncompletedTodos(array)
-                        case .failure(let error):
-                            self?.presenter?.onError(error)
-                        }
-                    })
-                } else {
-                    self?.presenter?.didGetUncompletedTodos(todos)
-                }
+                self?.presenter?.didGeInProgressTodos(todos)
             case .failure(let error):
                 self?.presenter?.onError(error)
             }
         })
-    } 
+    }
+    
 }
-
 
 extension TodoListInteractor: RemoteManagerResponseProtocol {
     
-    func didGetCompletedTodos(_ todos: [Todo]) {
-        presenter?.didGetCompletedTodos(todos)
+    func didGetTodos(_ todos: [Todo]) {
+        presenter?.didGetCompletedTodos(todos.filter({it in it.completed}))
+        presenter?.didGeInProgressTodos(todos.filter({it in !it.completed}))
     }
     
-    func didGetInProgressTodos(_ todos: [Todo]) {
-        presenter?.didGetUncompletedTodos(todos)
-    }
-
     func onError(_ error: any Error) {
         presenter?.onError(error)
     }

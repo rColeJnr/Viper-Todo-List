@@ -10,12 +10,12 @@ import CoreData
 protocol LocalDataManagerProtocol {
     // Interactor -> LocalDataManager
     func getCompletedTodos(completion: @escaping (VtlTodoResult) -> Void)
-    func getInProgreeTodos(completion: @escaping (VtlTodoResult) -> Void)
+    func getInProgressTodos(completion: @escaping (VtlTodoResult) -> Void)
 }
 
 class LocalDataManager: LocalDataManagerProtocol {
     
-    func getInProgreeTodos(completion: @escaping (VtlTodoResult) -> Void) {
+    func getInProgressTodos(completion: @escaping (VtlTodoResult) -> Void) {
         let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
         let sortByDateCreated = NSSortDescriptor(key: #keyPath(Todo.dateCreated), ascending: false)
         let predicate = NSPredicate(format: "\(#keyPath(Todo.completed)) == \(false)")

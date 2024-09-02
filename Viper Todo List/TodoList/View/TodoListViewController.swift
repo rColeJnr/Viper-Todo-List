@@ -161,7 +161,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
 extension TodoListViewController: TodoListViewProtocol {
     func showInProgressTodos(with todos: [Todo]) {
         todoInprogressList = todos
-        todoListView.collectionView?.reloadSections(IndexSet(integer: 1))
+        todoListView.collectionView?.reloadData()
     }
     
     func showInProgressTodosLoading() {
@@ -174,7 +174,7 @@ extension TodoListViewController: TodoListViewProtocol {
     
     func showCompletedTodos(with todos: [Todo]) {
         todoCompletedList = todos
-        todoListView.collectionView?.reloadSections(IndexSet(integer: 3))
+        todoListView.collectionView?.reloadData()
     }
     
     func showCompletedTodosLoading() {
@@ -195,23 +195,16 @@ extension TodoListViewController: TodoListViewProtocol {
 extension TodoListViewController: NavigateToShowAllViewCellDelegate, TodoCreateNewViewCellDelegate, TodoCreateViewToTodoListViewDelegate, TodoDetailsViewToTodoListViewDelegate {
     
     func didUpdateTodo() {
-        updateCompletedList()
-        updateInProgressList()
+        presenter?.viewDidLoad()
     }
     
     func didDeleteTodo() {
-        updateCompletedList()
-        updateInProgressList()
-    }
-    
-    func updateCompletedList() {
-        presenter?.interactor?.getCompletedTodos()
+        presenter?.viewDidLoad()
     }
     
     func updateInProgressList() {
         presenter?.interactor?.getInProgressTodos()
     }
-    
     
     func createNewTodo() {
         presenter?.router?.createTodoCreateModule(from: self)
