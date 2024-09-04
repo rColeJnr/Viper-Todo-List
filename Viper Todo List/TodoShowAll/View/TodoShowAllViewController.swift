@@ -30,16 +30,12 @@ class TodoShowAllViewController: UIViewController, TodoShowAllViewDelegate, Todo
     }
     
     func didSelectTodo(with todo: Todo) {
-        presenter?.router?.createTodoDetailsViewController(from: self, for: todo)
+        presenter?.router?.createTodoDetailsViewController(from: self, animated: true, for: todo)
     }
     
     func showTodoList(for list: [Todo]) {
         todoShowAllView.stopAnimatingIndicatorView()
-        if list.isEmpty {
-            todoShowAllView.showEmptyView()
-        } else {
-            todoShowAllView.todoList = list
-        }
+        todoShowAllView.todoList = list
     }
     
 }

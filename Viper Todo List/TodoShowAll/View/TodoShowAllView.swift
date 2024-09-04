@@ -45,6 +45,7 @@ class TodoShowAllView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
+        showEmptyView()
         addSubviews(indicatorView, collectionView, emptyView)
         indicatorView.startAnimating()
         addConstraints()
@@ -58,7 +59,9 @@ class TodoShowAllView: UIView {
     }
     
     func showEmptyView() {
-        emptyView.isHidden = false
+        if !todoList.isEmpty {
+            emptyView.isHidden = false
+        }
     }
     
     func startAnimatingIndicatorView() {
@@ -86,6 +89,18 @@ class TodoShowAllView: UIView {
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
+    
+    // MARK: Test func
+    /// Won't ship with production
+    /// Code needed to test if the view has been configured
+    #if DEBUG
+    func isIndicatorViewAnimating() -> Bool {
+        return indicatorView.isAnimating
+    }
+    func isEmptyViewHidden() -> Bool {
+        return emptyView.isHidden
+    }
+    #endif
     
 }
 

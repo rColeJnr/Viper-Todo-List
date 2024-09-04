@@ -253,7 +253,9 @@ class TodoDetailsView: UIView {
     /// Won't ship with production
     /// Code needed to test if the view has been configured with given Todo
     /// Returns Todo
+    #if DEBUG
     func isViewConfigured() -> Todo {
         return self.todo
     }
+    #endif
 }
