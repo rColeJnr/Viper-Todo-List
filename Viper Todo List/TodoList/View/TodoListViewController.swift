@@ -193,7 +193,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
                 fatalError()
             }
             let todo = todoCompletedList[indexPath.row]
-            presenter?.showTodoDetails(for: todo)
+            presenter?.showTodoDetails(from: self, for: todo)
             
         case .inProgress:
             guard collectionView.dequeueReusableCell(
@@ -203,7 +203,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
                 fatalError()
             }
             let todo = todoInprogressList[indexPath.row]
-            presenter?.showTodoDetails(for: todo)
+            presenter?.showTodoDetails(from: self, for: todo)
 
         default:
             return

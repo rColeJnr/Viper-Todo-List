@@ -15,8 +15,8 @@ protocol TodoListPresenterProtocol: AnyObject {
     // View -> Presenter
     func viewDidLoad()
     func getInProgressTodos()
-    func createTodoCreateModule()
-    func showTodoDetails(for todo: Todo)
+    func createTodoCreateModule(from view: TodoListViewProtocol)
+    func showTodoDetails(from view: TodoListViewProtocol, for todo: Todo)
 }
 
 class TodoListPresenter: TodoListPresenterProtocol {
@@ -38,13 +38,13 @@ class TodoListPresenter: TodoListPresenterProtocol {
         interactor?.getInProgressTodos()
     }
     
-    func showTodoDetails(for todo: Todo) {
-        router?.createTodoDetailsViewController(from: view!, animated: true, for: todo)
+    func showTodoDetails(from view: TodoListViewProtocol,for todo: Todo) {
+        router?.createTodoDetailsViewController(from: view, animated: true, for: todo)
         
     }
     
-    func createTodoCreateModule() {
-        router?.createTodoCreateModule(from: view!, animated: true)
+    func createTodoCreateModule(from view: TodoListViewProtocol) {
+        router?.createTodoCreateModule(from: view, animated: true)
     }
 }
 
