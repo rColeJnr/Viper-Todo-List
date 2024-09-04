@@ -21,6 +21,7 @@ var sharedTestContext: NSManagedObjectContext = {
     return container.newBackgroundContext()
 }()
 
+
 public extension NSManagedObject {
     convenience init(testContext: NSManagedObjectContext?) {
         let context = testContext ?? sharedTestContext
@@ -29,3 +30,4 @@ public extension NSManagedObject {
         self.init(entity: entity, insertInto: context)
     }
 }
+

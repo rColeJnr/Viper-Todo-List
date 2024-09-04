@@ -12,6 +12,7 @@ final class TodoDetailsViewTests: XCTestCase {
     
     let todo = Todo(testContext: nil)
     let formatter = DateFormatter()
+    var vcMock: TodoDetailsViewControllerMock!
     var sut: TodoDetailsView!
     override func setUpWithError() throws {
         todo.name = "Ricardo"
@@ -20,7 +21,10 @@ final class TodoDetailsViewTests: XCTestCase {
         formatter.dateFormat = "dd'-'MM'-'yyyy"
         todo.dateCreated = formatter.date(from: "26-08-2024")!
         todo.dateCompleted = formatter.date(from: "06-09-2024")!
+        vcMock = TodoDetailsViewControllerMock()
         sut = TodoDetailsView()
+        sut.delegate = vcMock.self
+        sut.configure(with: todo)
     }
 
     override func tearDownWithError() throws {
@@ -32,7 +36,6 @@ final class TodoDetailsViewTests: XCTestCase {
     }
 
     func test_viewIsConfiguredWithTodo() {
-        sut.configure(with: todo)
         let todo = sut.isViewConfigured()
         XCTAssertEqual(todo.name, "Ricardo")
         XCTAssertEqual(todo.details, "Ricardo is an android developer")
@@ -42,14 +45,12 @@ final class TodoDetailsViewTests: XCTestCase {
     }
     
     func test_shouldNotUpdateTodo() {
-        sut.configure(with: todo)
         let shouldUpdate = sut.shouldUpdateTodo()
         
         XCTAssertFalse(shouldUpdate)
     }
     
     func test_shouldUpdateTodoName() {
-        sut.configure(with: todo)
         todo.name = "Antonio"
         let shouldUpdate = sut.shouldUpdateTodo()
         
@@ -57,7 +58,6 @@ final class TodoDetailsViewTests: XCTestCase {
     }
     
     func test_shouldUpdateTodoDetails() {
-        sut.configure(with: todo)
         todo.details = "DETAILS"
         let shouldUpdate = sut.shouldUpdateTodo()
         
@@ -65,7 +65,6 @@ final class TodoDetailsViewTests: XCTestCase {
     }
     
     func test_shouldUpdateTodoMarkCompleted() {
-        sut.configure(with: todo)
         todo.completed = !todo.completed
         let shouldUpdate = sut.shouldUpdateTodo()
         
@@ -73,7 +72,6 @@ final class TodoDetailsViewTests: XCTestCase {
     }
     
     func test_shouldUpdateTodoDateCompleted() {
-        sut.configure(with: todo)
         sut.markAsComplete.sendActions(for: .touchUpInside)
         let shouldUpdate = sut.shouldUpdateTodo()
         
@@ -81,7 +79,6 @@ final class TodoDetailsViewTests: XCTestCase {
     }
     
     func test_shouldNotShowErrorView() {
-        sut.configure(with: todo)
         todo.name = "New name"
         sut.saveBtn.sendActions(for: .touchUpInside)
             
@@ -89,9 +86,29 @@ final class TodoDetailsViewTests: XCTestCase {
     }
     
     func test_shouldShowErrorView() {
-        sut.configure(with: todo)
         sut.saveBtn.sendActions(for: .touchUpInside)
         
         XCTAssertFalse(sut.errorView.isHidden)
+    }
+    
+    func test_shouldUpdateMarkAsCompleted() {
+        XCTAssertEqual(sut.markAsComplete.configuration?.title, "Mark as In Progress")
+        sut.markAsComplete.sendActions(for: .touchUpInside)
+        XCTAssertEqual(sut.markAsComplete.configuration?.title, "Mark as Completed")
+        sut.markAsComplete.sendActions(for: .touchUpInside)
+        XCTAssertEqual(sut.markAsComplete.configuration?.title, "Mark as In Progress")
+    }
+    
+    func test_deleteBtnDeletesTodo() {
+        sut.deleteBtn.sendActions(for: .touchUpInside)
+   
+        XCTAssertTrue(vcMock.didDeleteTodo)
+    }
+    
+    func test_saveBtnUpdatesTodo() {
+        todo.name = "Different name"
+        sut.saveBtn.sendActions(for: .touchUpInside)
+   
+        XCTAssertTrue(vcMock.didUpdateTodo)
     }
 }
