@@ -23,7 +23,7 @@ protocol TodoDetailsViewToTodoListViewDelegate {
 
 class TodoDetailsViewController: UIViewController {
     
-    private let detailsView = TodoDetailsView()
+    let detailsView = TodoDetailsView()
     var presenter: TodoDetailsPresenterProtocol?
     var delegate: TodoDetailsViewToTodoListViewDelegate?
 

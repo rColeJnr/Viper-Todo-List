@@ -44,8 +44,8 @@
 		7576F9F12C8811DD0096C676 /* SecondOnboardingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576F9F02C8811DD0096C676 /* SecondOnboardingViewCell.swift */; };
 		7576F9FA2C881E1E0096C676 /* Viper_Todo_ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576F9F92C881E1E0096C676 /* Viper_Todo_ListTests.swift */; };
 		7576FA062C8837DE0096C676 /* TodoModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA052C8837DE0096C676 /* TodoModelTests.swift */; };
-		7576FA092C88413A0096C676 /* TodoCreateInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA082C88413A0096C676 /* TodoCreateInteractorTest.swift */; };
-		7576FA0B2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA0A2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift */; };
+		7576FA0E2C8858AD0096C676 /* TodoDetailsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA0D2C8858AD0096C676 /* TodoDetailsViewTests.swift */; };
+		7576FA102C885AC20096C676 /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA0F2C885AC20096C676 /* CoreDataContext.swift */; };
 		7579A89E2C84309600F6E69E /* TodoCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */; };
 		7579A8A02C8430A000F6E69E /* TodoCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89F2C8430A000F6E69E /* TodoCreateView.swift */; };
 		7579A8A22C8430AA00F6E69E /* TodoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */; };
@@ -114,8 +114,8 @@
 		7576F9F72C881E1E0096C676 /* Viper Todo ListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Viper Todo ListTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7576F9F92C881E1E0096C676 /* Viper_Todo_ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viper_Todo_ListTests.swift; sourceTree = "<group>"; };
 		7576FA052C8837DE0096C676 /* TodoModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModelTests.swift; sourceTree = "<group>"; };
-		7576FA082C88413A0096C676 /* TodoCreateInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateInteractorTest.swift; sourceTree = "<group>"; };
-		7576FA0A2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateInteractorProtocolMock.swift; sourceTree = "<group>"; };
+		7576FA0D2C8858AD0096C676 /* TodoDetailsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsViewTests.swift; sourceTree = "<group>"; };
+		7576FA0F2C885AC20096C676 /* CoreDataContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContext.swift; sourceTree = "<group>"; };
 		7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateRouter.swift; sourceTree = "<group>"; };
 		7579A89F2C8430A000F6E69E /* TodoCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateView.swift; sourceTree = "<group>"; };
 		7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateViewController.swift; sourceTree = "<group>"; };
@@ -262,9 +262,11 @@
 		7576F9F82C881E1E0096C676 /* Viper Todo ListTests */ = {
 			isa = PBXGroup;
 			children = (
+				7576FA0C2C88588D0096C676 /* TodoDetails */,
 				7576FA032C882F550096C676 /* TodoCreate */,
 				7576FA022C882F3A0096C676 /* TodoList */,
 				7576F9F92C881E1E0096C676 /* Viper_Todo_ListTests.swift */,
+				7576FA0F2C885AC20096C676 /* CoreDataContext.swift */,
 			);
 			path = "Viper Todo ListTests";
 			sourceTree = "<group>";
@@ -296,10 +298,16 @@
 		7576FA072C8841240096C676 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				7576FA082C88413A0096C676 /* TodoCreateInteractorTest.swift */,
-				7576FA0A2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7576FA0C2C88588D0096C676 /* TodoDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA0D2C8858AD0096C676 /* TodoDetailsViewTests.swift */,
+			);
+			path = TodoDetails;
 			sourceTree = "<group>";
 		};
 		7579A8992C84304E00F6E69E /* TodoCreate */ = {
@@ -585,8 +593,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7576F9FA2C881E1E0096C676 /* Viper_Todo_ListTests.swift in Sources */,
-				7576FA092C88413A0096C676 /* TodoCreateInteractorTest.swift in Sources */,
-				7576FA0B2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift in Sources */,
+				7576FA0E2C8858AD0096C676 /* TodoDetailsViewTests.swift in Sources */,
+				7576FA102C885AC20096C676 /* CoreDataContext.swift in Sources */,
 				7576FA062C8837DE0096C676 /* TodoModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

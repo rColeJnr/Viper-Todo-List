@@ -58,7 +58,7 @@ class TodoDetailsView: UIView {
         return view
     }()
     
-    private let markAsComplete = {
+    internal let markAsComplete = {
         var viewConfig = UIButton.Configuration.plain()
         viewConfig.baseForegroundColor = .systemBlue
         viewConfig.imagePlacement = .trailing
@@ -80,7 +80,7 @@ class TodoDetailsView: UIView {
         return view
     }()
     
-    private let deleteBtn = {
+    internal let deleteBtn = {
         var viewConfig = UIButton.Configuration.bordered()
         viewConfig.title = "Delete"
         viewConfig.cornerStyle = .medium
@@ -92,7 +92,7 @@ class TodoDetailsView: UIView {
         return view
     }()
     
-    private let saveBtn = {
+    internal let saveBtn = {
         var viewConfig = UIButton.Configuration.bordered()
         viewConfig.title = "Save"
         viewConfig.cornerStyle = .medium
@@ -104,7 +104,7 @@ class TodoDetailsView: UIView {
         return view
     }()
     
-    private let errorView = {
+    internal let errorView = {
         let view = UILabel()
         view.text = "No changes made"
         view.textColor = .red
@@ -120,9 +120,9 @@ class TodoDetailsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        markAsComplete.addTarget(self, action: #selector(onMarkAsComplete), for: .touchDown)
-        saveBtn.addTarget(self, action: #selector(onSaveBtn), for: .touchDown)
-        deleteBtn.addTarget(self, action: #selector(onDeleteBtn), for: .touchDown)
+        markAsComplete.addTarget(self, action: #selector(onMarkAsComplete), for: .touchUpInside)
+        saveBtn.addTarget(self, action: #selector(onSaveBtn), for: .touchUpInside)
+        deleteBtn.addTarget(self, action: #selector(onDeleteBtn), for: .touchUpInside)
         addSubviews(errorView, nameLabel, name, descriptionLabel, descriptionTF, markAsComplete, dateCreated, deleteBtn, saveBtn)
         addConstraints()
     }
@@ -147,19 +147,39 @@ class TodoDetailsView: UIView {
     }
     
     @objc private func onSaveBtn(_ sender: UIButton) {
-        if name.text != todo.name || descriptionTF.text != todo.details || isCompleted != todo.completed {
+        if shouldUpdateTodo() {
+            delegate?.updateTodo(todo: todo)
+        } else {
+            errorView.isHidden = false
+        }
+    }
+    
+    internal func shouldUpdateTodo() -> Bool {
+        let result = if
+            name.text != todo.name ||
+            descriptionTF.text != todo.details ||
+            isCompleted  != todo.completed {
+                true
+            } else {
+                false
+            }
+        if name.text != todo.name {
             todo.name = name.text
+        }
+        if descriptionTF.text != todo.details {
             todo.details = descriptionTF.text
+        }
+        if isCompleted != todo.completed {
             todo.completed = isCompleted
+
             if isCompleted {
                 todo.dateCompleted = Date.now
             } else {
                 todo.dateCompleted = nil
             }
-            delegate?.updateTodo(todo: todo)
-        } else {
-            errorView.isHidden = false
         }
+        
+        return result
     }
     
     @objc private func onDeleteBtn(_ sender: UIButton) {
@@ -168,8 +188,9 @@ class TodoDetailsView: UIView {
     
     private var isCompleted: Bool!
     private var todo: Todo!
+    
     /// Bind UI with data
-    func configure(with todo: Todo) {
+    internal func configure(with todo: Todo) {
         self.todo = todo
         self.isCompleted = todo.completed
         name.text = todo.name
@@ -226,5 +247,13 @@ class TodoDetailsView: UIView {
             saveBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             
         ])
+    }
+    
+    // MARK: Test func
+    /// Won't ship with production
+    /// Code needed to test if the view has been configured with given Todo
+    /// Returns Todo
+    func isViewConfigured() -> Todo {
+        return self.todo
     }
 }
