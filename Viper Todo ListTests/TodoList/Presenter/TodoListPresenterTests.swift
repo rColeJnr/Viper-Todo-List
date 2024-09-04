@@ -25,7 +25,9 @@ final class TodoListPresenterTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-//        sut = nil
+        interactorMock = nil
+        routerMock = nil
+        viewMock = nil
     }
     
     func test_viewDidLoad() {
