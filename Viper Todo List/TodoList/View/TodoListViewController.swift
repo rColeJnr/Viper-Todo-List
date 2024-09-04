@@ -204,17 +204,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
             }
             let todo = todoInprogressList[indexPath.row]
             presenter?.showTodoDetails(for: todo)
-               
-        case .ErrorView:
-            guard collectionView.dequeueReusableCell(
-                withReuseIdentifier: todoInProgressViewCell.cellIdentifier,
-                for: indexPath
-            ) is todoInProgressViewCell else {
-                fatalError()
-            }
-            let todo = todoInprogressList[indexPath.row]
-            presenter?.showTodoDetails(for: todo)
-        
+
         default:
             return
             // do nothing
@@ -242,8 +232,13 @@ extension TodoListViewController: TodoListViewProtocol {
     }
     
     func hideInProgressTodosLoading() {
-        loadingView = []
-        todoListView.collectionView?.reloadData()
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: {timer in
+            
+            OperationQueue.main.addOperation {
+                self.loadingView = []
+                self.todoListView.collectionView?.reloadData()
+            }
+        })
     }
     
     func showCompletedTodos(with todos: [Todo]) {
@@ -263,8 +258,13 @@ extension TodoListViewController: TodoListViewProtocol {
     }
     
     func hideCompletedTodosLoading() {
-        loadingView = []
-        todoListView.collectionView?.reloadData()
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: {timer in
+            
+            OperationQueue.main.addOperation {
+                self.loadingView = []
+                self.todoListView.collectionView?.reloadData()
+            }
+        })
     }
     
     func showError(error: any Error) {

@@ -78,7 +78,7 @@ class TodoEmptyCompleteViewCell: UICollectionViewCell {
         contentView.backgroundColor = .secondarySystemBackground
         contentView.addSubviews(verticalDivider, name, dateCreated, dateCompleted, horizontalDivider, details, markAsUncompleted)
         addConstraints()
-        contentView.alpha = 0.5
+        contentView.alpha = 0.3
         contentView.layer.cornerRadius = 15
     }
     

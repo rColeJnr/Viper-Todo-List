@@ -73,7 +73,7 @@ class todoEmptyInProgreessViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .secondarySystemBackground
-        contentView.alpha = 0.5
+        contentView.alpha = 0.3
         contentView.addSubviews(name, dateCreated, horizontalDivider, verticalDivider, detailsLabel, details, markAsCompleted)
         contentView.layer.cornerRadius = 15
         addConstraints()

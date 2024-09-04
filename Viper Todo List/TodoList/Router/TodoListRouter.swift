@@ -13,7 +13,7 @@ protocol TodoListRouterProtocol: AnyObject {
     func createTodoShowAllViewController(from view: TodoListViewProtocol, with title: String, for list: [Todo])
     func createTodoCreateModule(from view: TodoListViewProtocol)
     
-    func createModule() -> TodoListViewController
+    func createModule() -> UINavigationController
     
 }
 class TodoListRouter: TodoListRouterProtocol {
@@ -43,7 +43,7 @@ class TodoListRouter: TodoListRouterProtocol {
         }
     }
     
-    func createModule() -> TodoListViewController {
+    func createModule() -> UINavigationController {
         let view = TodoListViewController()
         let presenter: TodoListPresenterProtocol & TodoListInteractorResponseProtocol = TodoListPresenter()
         var interactor: TodoListInteractorProtocol & RemoteManagerResponseProtocol = TodoListInteractor()
@@ -59,6 +59,7 @@ class TodoListRouter: TodoListRouterProtocol {
         interactor.remoteDataManager = remoteDataManager
         remoteDataManager.remoteRequestHandler = interactor
         view.title = "Задачи"
-        return view
+        let navController = UINavigationController(rootViewController: view)
+        return navController
     }
 }

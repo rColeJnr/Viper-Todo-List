@@ -22,6 +22,7 @@ class TodoErrorViewCell: UICollectionViewCell {
         let view = UILabel()
         view.text = "Something went wrong!"
         view.adjustsFontForContentSizeCategory = true
+        view.isUserInteractionEnabled = false
         view.font = .systemFont(ofSize: 20, weight: .medium)
         view.textColor = .systemRed
         view.textAlignment = .center
