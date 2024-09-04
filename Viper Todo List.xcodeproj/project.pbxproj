@@ -72,6 +72,10 @@
 		7576FA5E2C88F0350096C676 /* TodoListInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA5D2C88F0350096C676 /* TodoListInteractorMock.swift */; };
 		7576FA602C88F0DE0096C676 /* TodoListRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA5F2C88F0DE0096C676 /* TodoListRouterMock.swift */; };
 		7576FA622C88F2DF0096C676 /* TodoListViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA612C88F2DF0096C676 /* TodoListViewMock.swift */; };
+		7576FA642C88FE040096C676 /* TodoListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA632C88FE040096C676 /* TodoListInteractorTests.swift */; };
+		7576FA662C88FE5E0096C676 /* TodoListPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA652C88FE5E0096C676 /* TodoListPresenterMock.swift */; };
+		7576FA682C88FF0D0096C676 /* TodoListLocalDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA672C88FF0D0096C676 /* TodoListLocalDataManagerMock.swift */; };
+		7576FA6A2C8900770096C676 /* TodoListRemoteDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA692C8900770096C676 /* TodoListRemoteDataManagerMock.swift */; };
 		7579A89E2C84309600F6E69E /* TodoCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */; };
 		7579A8A02C8430A000F6E69E /* TodoCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89F2C8430A000F6E69E /* TodoCreateView.swift */; };
 		7579A8A22C8430AA00F6E69E /* TodoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */; };
@@ -168,6 +172,10 @@
 		7576FA5D2C88F0350096C676 /* TodoListInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListInteractorMock.swift; sourceTree = "<group>"; };
 		7576FA5F2C88F0DE0096C676 /* TodoListRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListRouterMock.swift; sourceTree = "<group>"; };
 		7576FA612C88F2DF0096C676 /* TodoListViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewMock.swift; sourceTree = "<group>"; };
+		7576FA632C88FE040096C676 /* TodoListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListInteractorTests.swift; sourceTree = "<group>"; };
+		7576FA652C88FE5E0096C676 /* TodoListPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListPresenterMock.swift; sourceTree = "<group>"; };
+		7576FA672C88FF0D0096C676 /* TodoListLocalDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListLocalDataManagerMock.swift; sourceTree = "<group>"; };
+		7576FA692C8900770096C676 /* TodoListRemoteDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListRemoteDataManagerMock.swift; sourceTree = "<group>"; };
 		7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateRouter.swift; sourceTree = "<group>"; };
 		7579A89F2C8430A000F6E69E /* TodoCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateView.swift; sourceTree = "<group>"; };
 		7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateViewController.swift; sourceTree = "<group>"; };
@@ -494,6 +502,7 @@
 		7576FA512C88E4050096C676 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				7576FA632C88FE040096C676 /* TodoListInteractorTests.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -528,6 +537,9 @@
 				7576FA5D2C88F0350096C676 /* TodoListInteractorMock.swift */,
 				7576FA5F2C88F0DE0096C676 /* TodoListRouterMock.swift */,
 				7576FA612C88F2DF0096C676 /* TodoListViewMock.swift */,
+				7576FA652C88FE5E0096C676 /* TodoListPresenterMock.swift */,
+				7576FA672C88FF0D0096C676 /* TodoListLocalDataManagerMock.swift */,
+				7576FA692C8900770096C676 /* TodoListRemoteDataManagerMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -820,18 +832,22 @@
 				7576F9FA2C881E1E0096C676 /* Viper_Todo_ListTests.swift in Sources */,
 				7576FA362C88B3350096C676 /* TodoCreateInteratorResponseMock.swift in Sources */,
 				7576FA342C88B2AD0096C676 /* TodoCreateDataManagerMock.swift in Sources */,
+				7576FA682C88FF0D0096C676 /* TodoListLocalDataManagerMock.swift in Sources */,
 				7576FA2A2C88AB3A0096C676 /* TodoDetailsInteractorResponseMock.swift in Sources */,
 				7576FA0E2C8858AD0096C676 /* TodoDetailsViewTests.swift in Sources */,
 				7576FA452C88C6B50096C676 /* TodoShowAllRouterTests.swift in Sources */,
 				7576FA1A2C8893DD0096C676 /* TodoDetailsInteractorMock.swift in Sources */,
+				7576FA662C88FE5E0096C676 /* TodoListPresenterMock.swift in Sources */,
 				7576FA622C88F2DF0096C676 /* TodoListViewMock.swift in Sources */,
 				7576FA492C88CFCF0096C676 /* TodoShowAllPresenterTests.swift in Sources */,
 				7576FA4F2C88D81E0096C676 /* TodoShowAllViewTests.swift in Sources */,
 				7576FA4B2C88D0B20096C676 /* TodoShowAllViewMock.swift in Sources */,
+				7576FA642C88FE040096C676 /* TodoListInteractorTests.swift in Sources */,
 				7576FA162C8887590096C676 /* TodoDetailsPresenterTests.swift in Sources */,
 				7576FA592C88EAB00096C676 /* TodoListEntitiesTests.swift in Sources */,
 				7576FA4D2C88D1CA0096C676 /* TodoShowAllRouterMock.swift in Sources */,
 				7576FA3A2C88B9F90096C676 /* TodoCreateInteractorMock.swift in Sources */,
+				7576FA6A2C8900770096C676 /* TodoListRemoteDataManagerMock.swift in Sources */,
 				7576FA102C885AC20096C676 /* CoreDataContextTests.swift in Sources */,
 				7576FA1C2C889DB70096C676 /* TodoDetailsViewMock.swift in Sources */,
 				7576FA1F2C889E8C0096C676 /* TodoDetailsInteractorTests.swift in Sources */,
