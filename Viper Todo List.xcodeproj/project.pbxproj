@@ -42,6 +42,10 @@
 		7576F9ED2C8766A70096C676 /* FirstOnboardingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576F9EC2C8766A70096C676 /* FirstOnboardingViewCell.swift */; };
 		7576F9EF2C880ECB0096C676 /* OnboardingScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576F9EE2C880ECB0096C676 /* OnboardingScreens.swift */; };
 		7576F9F12C8811DD0096C676 /* SecondOnboardingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576F9F02C8811DD0096C676 /* SecondOnboardingViewCell.swift */; };
+		7576F9FA2C881E1E0096C676 /* Viper_Todo_ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576F9F92C881E1E0096C676 /* Viper_Todo_ListTests.swift */; };
+		7576FA062C8837DE0096C676 /* TodoModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA052C8837DE0096C676 /* TodoModelTests.swift */; };
+		7576FA092C88413A0096C676 /* TodoCreateInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA082C88413A0096C676 /* TodoCreateInteractorTest.swift */; };
+		7576FA0B2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA0A2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift */; };
 		7579A89E2C84309600F6E69E /* TodoCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */; };
 		7579A8A02C8430A000F6E69E /* TodoCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89F2C8430A000F6E69E /* TodoCreateView.swift */; };
 		7579A8A22C8430AA00F6E69E /* TodoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */; };
@@ -60,6 +64,16 @@
 		75EE13292C7DD459001BA9F1 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE13282C7DD459001BA9F1 /* TodoListViewController.swift */; };
 		75EE13302C7DDD7D001BA9F1 /* VtlExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE132F2C7DDD7D001BA9F1 /* VtlExtenstions.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7576F9FB2C881E1E0096C676 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75EE13022C7D9C6F001BA9F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75EE13092C7D9C6F001BA9F1;
+			remoteInfo = "Viper Todo List";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		750E3D662C7E5F0900D0E9DD /* todoInProgressViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todoInProgressViewCell.swift; sourceTree = "<group>"; };
@@ -97,6 +111,11 @@
 		7576F9EC2C8766A70096C676 /* FirstOnboardingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewCell.swift; sourceTree = "<group>"; };
 		7576F9EE2C880ECB0096C676 /* OnboardingScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreens.swift; sourceTree = "<group>"; };
 		7576F9F02C8811DD0096C676 /* SecondOnboardingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingViewCell.swift; sourceTree = "<group>"; };
+		7576F9F72C881E1E0096C676 /* Viper Todo ListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Viper Todo ListTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7576F9F92C881E1E0096C676 /* Viper_Todo_ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viper_Todo_ListTests.swift; sourceTree = "<group>"; };
+		7576FA052C8837DE0096C676 /* TodoModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModelTests.swift; sourceTree = "<group>"; };
+		7576FA082C88413A0096C676 /* TodoCreateInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateInteractorTest.swift; sourceTree = "<group>"; };
+		7576FA0A2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateInteractorProtocolMock.swift; sourceTree = "<group>"; };
 		7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateRouter.swift; sourceTree = "<group>"; };
 		7579A89F2C8430A000F6E69E /* TodoCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateView.swift; sourceTree = "<group>"; };
 		7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +138,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7576F9F42C881E1E0096C676 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75EE13072C7D9C6F001BA9F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -233,6 +259,49 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		7576F9F82C881E1E0096C676 /* Viper Todo ListTests */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA032C882F550096C676 /* TodoCreate */,
+				7576FA022C882F3A0096C676 /* TodoList */,
+				7576F9F92C881E1E0096C676 /* Viper_Todo_ListTests.swift */,
+			);
+			path = "Viper Todo ListTests";
+			sourceTree = "<group>";
+		};
+		7576FA022C882F3A0096C676 /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TodoList;
+			sourceTree = "<group>";
+		};
+		7576FA032C882F550096C676 /* TodoCreate */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA072C8841240096C676 /* Interactor */,
+				7576FA042C8837C90096C676 /* Entity */,
+			);
+			path = TodoCreate;
+			sourceTree = "<group>";
+		};
+		7576FA042C8837C90096C676 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA052C8837DE0096C676 /* TodoModelTests.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		7576FA072C8841240096C676 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA082C88413A0096C676 /* TodoCreateInteractorTest.swift */,
+				7576FA0A2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		7579A8992C84304E00F6E69E /* TodoCreate */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				75EE130C2C7D9C6F001BA9F1 /* Viper Todo List */,
+				7576F9F82C881E1E0096C676 /* Viper Todo ListTests */,
 				75EE130B2C7D9C6F001BA9F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -299,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				75EE130A2C7D9C6F001BA9F1 /* Viper Todo List.app */,
+				7576F9F72C881E1E0096C676 /* Viper Todo ListTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -416,6 +487,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7576F9F62C881E1E0096C676 /* Viper Todo ListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7576F9FD2C881E1E0096C676 /* Build configuration list for PBXNativeTarget "Viper Todo ListTests" */;
+			buildPhases = (
+				7576F9F32C881E1E0096C676 /* Sources */,
+				7576F9F42C881E1E0096C676 /* Frameworks */,
+				7576F9F52C881E1E0096C676 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7576F9FC2C881E1E0096C676 /* PBXTargetDependency */,
+			);
+			name = "Viper Todo ListTests";
+			productName = "Viper Todo ListTests";
+			productReference = 7576F9F72C881E1E0096C676 /* Viper Todo ListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		75EE13092C7D9C6F001BA9F1 /* Viper Todo List */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75EE131E2C7D9C70001BA9F1 /* Build configuration list for PBXNativeTarget "Viper Todo List" */;
@@ -443,6 +532,10 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					7576F9F62C881E1E0096C676 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 75EE13092C7D9C6F001BA9F1;
+					};
 					75EE13092C7D9C6F001BA9F1 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -462,11 +555,19 @@
 			projectRoot = "";
 			targets = (
 				75EE13092C7D9C6F001BA9F1 /* Viper Todo List */,
+				7576F9F62C881E1E0096C676 /* Viper Todo ListTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7576F9F52C881E1E0096C676 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75EE13082C7D9C6F001BA9F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,6 +580,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7576F9F32C881E1E0096C676 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7576F9FA2C881E1E0096C676 /* Viper_Todo_ListTests.swift in Sources */,
+				7576FA092C88413A0096C676 /* TodoCreateInteractorTest.swift in Sources */,
+				7576FA0B2C8842AC0096C676 /* TodoCreateInteractorProtocolMock.swift in Sources */,
+				7576FA062C8837DE0096C676 /* TodoModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75EE13062C7D9C6F001BA9F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -538,6 +650,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7576F9FC2C881E1E0096C676 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75EE13092C7D9C6F001BA9F1 /* Viper Todo List */;
+			targetProxy = 7576F9FB2C881E1E0096C676 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		75EE13182C7D9C70001BA9F1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -550,6 +670,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7576F9FE2C881E1E0096C676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3JTA2CM5N8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rick.Viper-Todo-ListTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Viper Todo List.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Viper Todo List";
+			};
+			name = Debug;
+		};
+		7576F9FF2C881E1E0096C676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3JTA2CM5N8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rick.Viper-Todo-ListTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Viper Todo List.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Viper Todo List";
+			};
+			name = Release;
+		};
 		75EE131C2C7D9C70001BA9F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -726,6 +882,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7576F9FD2C881E1E0096C676 /* Build configuration list for PBXNativeTarget "Viper Todo ListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7576F9FE2C881E1E0096C676 /* Debug */,
+				7576F9FF2C881E1E0096C676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		75EE13052C7D9C6F001BA9F1 /* Build configuration list for PBXProject "Viper Todo List" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

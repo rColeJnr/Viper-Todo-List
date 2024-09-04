@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct TodoModel {
+struct TodoModel: Equatable {
     let name: String
     let details: String
     let completed: Bool
     let dateCreated: Date
-    let dateCompleted: Date?
+    var dateCompleted: Date?
     
     init(name: String, details: String, completed: Bool, dateCreated: Date, dateCompleted: Date? = nil) {
         self.name = name
@@ -21,4 +21,9 @@ struct TodoModel {
         self.dateCreated = dateCreated
         self.dateCompleted = dateCompleted
     }
+    
+    static func == (lhs: TodoModel, rhs: TodoModel) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
 }
