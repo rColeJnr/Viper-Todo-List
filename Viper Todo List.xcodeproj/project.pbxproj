@@ -66,6 +66,8 @@
 		7576FA4B2C88D0B20096C676 /* TodoShowAllViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA4A2C88D0B20096C676 /* TodoShowAllViewMock.swift */; };
 		7576FA4D2C88D1CA0096C676 /* TodoShowAllRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA4C2C88D1CA0096C676 /* TodoShowAllRouterMock.swift */; };
 		7576FA4F2C88D81E0096C676 /* TodoShowAllViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA4E2C88D81E0096C676 /* TodoShowAllViewTests.swift */; };
+		7576FA572C88E44A0096C676 /* TodoListRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA562C88E44A0096C676 /* TodoListRouterTests.swift */; };
+		7576FA592C88EAB00096C676 /* TodoListEntitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA582C88EAB00096C676 /* TodoListEntitiesTests.swift */; };
 		7579A89E2C84309600F6E69E /* TodoCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */; };
 		7579A8A02C8430A000F6E69E /* TodoCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89F2C8430A000F6E69E /* TodoCreateView.swift */; };
 		7579A8A22C8430AA00F6E69E /* TodoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */; };
@@ -156,6 +158,8 @@
 		7576FA4A2C88D0B20096C676 /* TodoShowAllViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoShowAllViewMock.swift; sourceTree = "<group>"; };
 		7576FA4C2C88D1CA0096C676 /* TodoShowAllRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoShowAllRouterMock.swift; sourceTree = "<group>"; };
 		7576FA4E2C88D81E0096C676 /* TodoShowAllViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoShowAllViewTests.swift; sourceTree = "<group>"; };
+		7576FA562C88E44A0096C676 /* TodoListRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListRouterTests.swift; sourceTree = "<group>"; };
+		7576FA582C88EAB00096C676 /* TodoListEntitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListEntitiesTests.swift; sourceTree = "<group>"; };
 		7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateRouter.swift; sourceTree = "<group>"; };
 		7579A89F2C8430A000F6E69E /* TodoCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateView.swift; sourceTree = "<group>"; };
 		7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +320,11 @@
 		7576FA022C882F3A0096C676 /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
+				7576FA542C88E4270096C676 /* Router */,
+				7576FA532C88E4220096C676 /* Entities */,
+				7576FA522C88E40A0096C676 /* Presenter */,
+				7576FA512C88E4050096C676 /* Interactor */,
+				7576FA502C88E4010096C676 /* View */,
 			);
 			path = TodoList;
 			sourceTree = "<group>";
@@ -464,6 +473,43 @@
 				7576FA4C2C88D1CA0096C676 /* TodoShowAllRouterMock.swift */,
 			);
 			path = Doubles;
+			sourceTree = "<group>";
+		};
+		7576FA502C88E4010096C676 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7576FA512C88E4050096C676 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7576FA522C88E40A0096C676 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7576FA532C88E4220096C676 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA582C88EAB00096C676 /* TodoListEntitiesTests.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7576FA542C88E4270096C676 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA562C88E44A0096C676 /* TodoListRouterTests.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		7579A8992C84304E00F6E69E /* TodoCreate */ = {
@@ -762,6 +808,7 @@
 				7576FA4F2C88D81E0096C676 /* TodoShowAllViewTests.swift in Sources */,
 				7576FA4B2C88D0B20096C676 /* TodoShowAllViewMock.swift in Sources */,
 				7576FA162C8887590096C676 /* TodoDetailsPresenterTests.swift in Sources */,
+				7576FA592C88EAB00096C676 /* TodoListEntitiesTests.swift in Sources */,
 				7576FA4D2C88D1CA0096C676 /* TodoShowAllRouterMock.swift in Sources */,
 				7576FA3A2C88B9F90096C676 /* TodoCreateInteractorMock.swift in Sources */,
 				7576FA102C885AC20096C676 /* CoreDataContextTests.swift in Sources */,
@@ -770,6 +817,7 @@
 				7576FA232C88A2C40096C676 /* TodoDetailsViewControllerMock.swift in Sources */,
 				7576FA182C88939C0096C676 /* TodoDetailsLocalDataManagerMock.swift in Sources */,
 				7576FA472C88CA060096C676 /* TodoNavigationControllerMock.swift in Sources */,
+				7576FA572C88E44A0096C676 /* TodoListRouterTests.swift in Sources */,
 				7576FA312C88B21E0096C676 /* TodoCreateInteractorTests.swift in Sources */,
 				7576FA062C8837DE0096C676 /* TodoModelTests.swift in Sources */,
 			);

@@ -294,7 +294,7 @@ extension TodoListViewController: NavigateToShowAllViewCellDelegate, TodoCreateN
     }
     
     func createNewTodo() {
-        presenter?.router?.createTodoCreateModule(from: self)
+        presenter?.router?.createTodoCreateModule(from: self, animated: true)
     }
     
     func navigateToShowAll(_ title: String, completed flag: Bool) {
@@ -303,6 +303,6 @@ extension TodoListViewController: NavigateToShowAllViewCellDelegate, TodoCreateN
         } else {
             todoInprogressList
         }
-        presenter?.router?.createTodoShowAllViewController(from: self, with: title, for: list)
+        presenter?.router?.createTodoShowAllViewController(from: self, animated: true, with: title, for: list)
     }
 }

@@ -39,12 +39,12 @@ class TodoListPresenter: TodoListPresenterProtocol {
     }
     
     func showTodoDetails(for todo: Todo) {
-        router?.createTodoDetailsViewController(from: view!, for: todo)
+        router?.createTodoDetailsViewController(from: view!, animated: true, for: todo)
         
     }
     
     func createTodoCreateModule() {
-        router?.createTodoCreateModule(from: view!)
+        router?.createTodoCreateModule(from: view!, animated: true)
     }
 }
 

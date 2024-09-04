@@ -9,37 +9,37 @@ import UIKit
 
 protocol TodoListRouterProtocol: AnyObject {
     // Presenter -> Router
-    func createTodoDetailsViewController(from view: TodoListViewProtocol, for todo: Todo)
-    func createTodoShowAllViewController(from view: TodoListViewProtocol, with title: String, for list: [Todo])
-    func createTodoCreateModule(from view: TodoListViewProtocol)
+    func createTodoDetailsViewController(from view: TodoListViewProtocol, animated: Bool, for todo: Todo)
+    func createTodoShowAllViewController(from view: TodoListViewProtocol, animated: Bool, with title: String, for list: [Todo])
+    func createTodoCreateModule(from view: TodoListViewProtocol, animated: Bool)
     
     func createModule() -> UINavigationController
     
 }
 class TodoListRouter: TodoListRouterProtocol {
     
-    func createTodoCreateModule(from view: any TodoListViewProtocol) {
+    func createTodoCreateModule(from view: any TodoListViewProtocol, animated: Bool) {
         let createVc = TodoCreateRouter().createModule()
     
         if let sourceView = view as? TodoListViewController {
             createVc.delegate = sourceView.self
-            sourceView.navigationController?.pushViewController(createVc, animated: false)
+            sourceView.navigationController?.pushViewController(createVc, animated: animated)
         }
     }
         
-    func createTodoDetailsViewController(from view: TodoListViewProtocol, for todo: Todo) {
+    func createTodoDetailsViewController(from view: TodoListViewProtocol, animated: Bool, for todo: Todo) {
         let detailsVC = TodoDetailsRouter().createModule(for: todo)
         
         if let sourceView = view as? TodoListViewController {
             detailsVC.delegate = sourceView.self
-            sourceView.navigationController?.pushViewController(detailsVC, animated: true)
+            sourceView.navigationController?.pushViewController(detailsVC, animated: animated)
         }
     }
     
-    func createTodoShowAllViewController(from view: TodoListViewProtocol, with title: String, for list: [Todo]) {
+    func createTodoShowAllViewController(from view: TodoListViewProtocol, animated: Bool, with title: String, for list: [Todo]) {
         let showAllVC = TodoShowAllRouter().createModule(with: title, for: list)
         if let sourceView = view as? TodoListViewController {
-            sourceView.navigationController?.pushViewController(showAllVC, animated: true)
+            sourceView.navigationController?.pushViewController(showAllVC, animated: animated)
         }
     }
     
