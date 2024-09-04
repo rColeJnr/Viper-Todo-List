@@ -53,6 +53,13 @@
 		7576FA1F2C889E8C0096C676 /* TodoDetailsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA1E2C889E8C0096C676 /* TodoDetailsInteractorTests.swift */; };
 		7576FA232C88A2C40096C676 /* TodoDetailsViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA222C88A2C40096C676 /* TodoDetailsViewControllerMock.swift */; };
 		7576FA2A2C88AB3A0096C676 /* TodoDetailsInteractorResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA292C88AB3A0096C676 /* TodoDetailsInteractorResponseMock.swift */; };
+		7576FA312C88B21E0096C676 /* TodoCreateInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA302C88B21E0096C676 /* TodoCreateInteractorTests.swift */; };
+		7576FA342C88B2AD0096C676 /* TodoCreateDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA332C88B2AD0096C676 /* TodoCreateDataManagerMock.swift */; };
+		7576FA362C88B3350096C676 /* TodoCreateInteratorResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA352C88B3350096C676 /* TodoCreateInteratorResponseMock.swift */; };
+		7576FA382C88B59B0096C676 /* TodoCreatePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA372C88B59B0096C676 /* TodoCreatePresenterTests.swift */; };
+		7576FA3A2C88B9F90096C676 /* TodoCreateInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA392C88B9F90096C676 /* TodoCreateInteractorMock.swift */; };
+		7576FA3C2C88BBA10096C676 /* TodoCreateViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA3B2C88BBA10096C676 /* TodoCreateViewMock.swift */; };
+		7576FA3E2C88BCD60096C676 /* TodoCreateViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7576FA3D2C88BCD60096C676 /* TodoCreateViewTests.swift */; };
 		7579A89E2C84309600F6E69E /* TodoCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */; };
 		7579A8A02C8430A000F6E69E /* TodoCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A89F2C8430A000F6E69E /* TodoCreateView.swift */; };
 		7579A8A22C8430AA00F6E69E /* TodoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */; };
@@ -130,6 +137,13 @@
 		7576FA1E2C889E8C0096C676 /* TodoDetailsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsInteractorTests.swift; sourceTree = "<group>"; };
 		7576FA222C88A2C40096C676 /* TodoDetailsViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsViewControllerMock.swift; sourceTree = "<group>"; };
 		7576FA292C88AB3A0096C676 /* TodoDetailsInteractorResponseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsInteractorResponseMock.swift; sourceTree = "<group>"; };
+		7576FA302C88B21E0096C676 /* TodoCreateInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateInteractorTests.swift; sourceTree = "<group>"; };
+		7576FA332C88B2AD0096C676 /* TodoCreateDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateDataManagerMock.swift; sourceTree = "<group>"; };
+		7576FA352C88B3350096C676 /* TodoCreateInteratorResponseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateInteratorResponseMock.swift; sourceTree = "<group>"; };
+		7576FA372C88B59B0096C676 /* TodoCreatePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreatePresenterTests.swift; sourceTree = "<group>"; };
+		7576FA392C88B9F90096C676 /* TodoCreateInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateInteractorMock.swift; sourceTree = "<group>"; };
+		7576FA3B2C88BBA10096C676 /* TodoCreateViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateViewMock.swift; sourceTree = "<group>"; };
+		7576FA3D2C88BCD60096C676 /* TodoCreateViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateViewTests.swift; sourceTree = "<group>"; };
 		7579A89D2C84309600F6E69E /* TodoCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateRouter.swift; sourceTree = "<group>"; };
 		7579A89F2C8430A000F6E69E /* TodoCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateView.swift; sourceTree = "<group>"; };
 		7579A8A12C8430AA00F6E69E /* TodoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreateViewController.swift; sourceTree = "<group>"; };
@@ -295,7 +309,10 @@
 		7576FA032C882F550096C676 /* TodoCreate */ = {
 			isa = PBXGroup;
 			children = (
+				7576FA322C88B2910096C676 /* Doubles */,
+				7576FA2C2C88B1460096C676 /* View */,
 				7576FA072C8841240096C676 /* Interactor */,
+				7576FA2D2C88B1490096C676 /* Presenter */,
 				7576FA042C8837C90096C676 /* Entity */,
 			);
 			path = TodoCreate;
@@ -312,6 +329,7 @@
 		7576FA072C8841240096C676 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				7576FA302C88B21E0096C676 /* TodoCreateInteractorTests.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -359,6 +377,33 @@
 				7576FA222C88A2C40096C676 /* TodoDetailsViewControllerMock.swift */,
 				7576FA172C88939C0096C676 /* TodoDetailsLocalDataManagerMock.swift */,
 				7576FA292C88AB3A0096C676 /* TodoDetailsInteractorResponseMock.swift */,
+			);
+			path = Doubles;
+			sourceTree = "<group>";
+		};
+		7576FA2C2C88B1460096C676 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA3D2C88BCD60096C676 /* TodoCreateViewTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7576FA2D2C88B1490096C676 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA372C88B59B0096C676 /* TodoCreatePresenterTests.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7576FA322C88B2910096C676 /* Doubles */ = {
+			isa = PBXGroup;
+			children = (
+				7576FA352C88B3350096C676 /* TodoCreateInteratorResponseMock.swift */,
+				7576FA332C88B2AD0096C676 /* TodoCreateDataManagerMock.swift */,
+				7576FA392C88B9F90096C676 /* TodoCreateInteractorMock.swift */,
+				7576FA3B2C88BBA10096C676 /* TodoCreateViewMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -645,16 +690,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7576FA382C88B59B0096C676 /* TodoCreatePresenterTests.swift in Sources */,
+				7576FA3C2C88BBA10096C676 /* TodoCreateViewMock.swift in Sources */,
+				7576FA3E2C88BCD60096C676 /* TodoCreateViewTests.swift in Sources */,
 				7576F9FA2C881E1E0096C676 /* Viper_Todo_ListTests.swift in Sources */,
+				7576FA362C88B3350096C676 /* TodoCreateInteratorResponseMock.swift in Sources */,
+				7576FA342C88B2AD0096C676 /* TodoCreateDataManagerMock.swift in Sources */,
 				7576FA2A2C88AB3A0096C676 /* TodoDetailsInteractorResponseMock.swift in Sources */,
 				7576FA0E2C8858AD0096C676 /* TodoDetailsViewTests.swift in Sources */,
 				7576FA1A2C8893DD0096C676 /* TodoDetailsInteractorMock.swift in Sources */,
 				7576FA162C8887590096C676 /* TodoDetailsPresenterTests.swift in Sources */,
+				7576FA3A2C88B9F90096C676 /* TodoCreateInteractorMock.swift in Sources */,
 				7576FA102C885AC20096C676 /* CoreDataContextTests.swift in Sources */,
 				7576FA1C2C889DB70096C676 /* TodoDetailsViewMock.swift in Sources */,
 				7576FA1F2C889E8C0096C676 /* TodoDetailsInteractorTests.swift in Sources */,
 				7576FA232C88A2C40096C676 /* TodoDetailsViewControllerMock.swift in Sources */,
 				7576FA182C88939C0096C676 /* TodoDetailsLocalDataManagerMock.swift in Sources */,
+				7576FA312C88B21E0096C676 /* TodoCreateInteractorTests.swift in Sources */,
 				7576FA062C8837DE0096C676 /* TodoModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

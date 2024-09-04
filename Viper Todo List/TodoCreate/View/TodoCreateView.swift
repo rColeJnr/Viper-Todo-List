@@ -24,7 +24,7 @@ class TodoCreateView: UIView {
         return view
     }()
     
-    private let name = {
+    internal let name = {
         let view = UITextView()
         view.isEditable = true
         view.backgroundColor = .systemGray6
@@ -45,7 +45,7 @@ class TodoCreateView: UIView {
         return view
     }()
     
-    private let descriptionTF = {
+    internal let descriptionTF = {
         let view = UITextView()
         view.isEditable = true
         view.backgroundColor = .systemGray6
@@ -57,7 +57,7 @@ class TodoCreateView: UIView {
         return view
     }()
     
-    private let dateCreated = {
+    internal let dateCreated = {
         let view = UILabel()
         view.text = "Созданно : "
         view.textColor = .label
@@ -67,7 +67,7 @@ class TodoCreateView: UIView {
         return view
     }()
     
-    private let selectedDate = {
+    internal let selectedDate = {
         let view = UILabel()
         view.textColor = .label
         view.font = .systemFont(ofSize: 24, weight: .thin)
@@ -76,7 +76,7 @@ class TodoCreateView: UIView {
         return view
     }()
     
-    private  let datePickerView = {
+    internal let datePickerView = {
         let view = UIDatePicker()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.datePickerMode = .dateAndTime
@@ -85,7 +85,7 @@ class TodoCreateView: UIView {
         return view
     }()
     
-    private let createBtn = {
+    internal let createBtn = {
         var viewConfig = UIButton.Configuration.bordered()
         viewConfig.title = "+ Create"
         viewConfig.cornerStyle = .medium
@@ -97,7 +97,7 @@ class TodoCreateView: UIView {
         return view
     }()
     
-    private let errorView = {
+    internal let errorView = {
         let view = UILabel()
         view.text = "A todo must have a name and description"
         view.textColor = .red
@@ -115,7 +115,7 @@ class TodoCreateView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .systemBackground
         configDatePicker()
-        createBtn.addTarget(self, action: #selector(createBtnTarget), for: .touchDown)
+        createBtn.addTarget(self, action: #selector(createBtnTarget), for: .touchUpInside)
         addSubviews(errorView, nameLabel, name, descriptionLabel, descriptionTF, datePickerView, dateCreated, selectedDate, createBtn)
         addConstraints()
     }
@@ -128,11 +128,12 @@ class TodoCreateView: UIView {
     
     var delegate: TodoCreateViewDelegate?
     
+    internal func cannotCreateTodo() -> Bool {
+        return name.text.isEmpty || descriptionTF.text.isEmpty
+    }
+    
     @objc private func createBtnTarget(_ sender: UIButton) {
-        if
-            name.text.isEmpty ||
-            descriptionTF.text.isEmpty
-         {
+        if cannotCreateTodo(){
             self.errorView.isHidden = false
             return
         }
@@ -148,12 +149,6 @@ class TodoCreateView: UIView {
     
     @objc private func setDate(_ sender: UIDatePicker) {
         selectedDate.text = VtlDateFormatter.shared.dateFormatter(from: sender.date)
-    }
-    
-    func configure(with todo: TodoModel) {
-        name.text = todo.name
-        descriptionTF.text = todo.details
-        dateCreated.text = "Созданно : \(String(describing: todo.dateCreated))"
     }
     
     private func addConstraints() {
