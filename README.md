@@ -10,10 +10,9 @@ This separation of concerns enhances modularity, scalability and testability.
 This repository contains a detailed sample app that strictly implements VIPER architecture organizeing all features in View-Interactor-Presenter-Entity-Router
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/rColeJnr/Viper-Todo-List/Main Screen.png" width="250">
-  <img src="https://raw.githubusercontent.com/rColeJnr/Viper-Todo-List/Empty view.png" width="250">
-  <img src="https://raw.githubusercontent.com/rColeJnr/Viper-Todo-List/Onboarding.png" width="250">
-  <img src="https://raw.githubusercontent.com/rColeJnr/Viper-Todo-List/Details creen.png" width="250">
+  <img src="https://github.com/rColeJnr/Viper-Todo-List/blob/e94a93b3b7173d31dd0e39dfa43522d4e72c18f8/Onboarding.png" width="250">
+  <img src="https://github.com/rColeJnr/Viper-Todo-List/blob/e94a93b3b7173d31dd0e39dfa43522d4e72c18f8/Empty%20view.png" width="250"> 
+  <img src="https://github.com/rColeJnr/Viper-Todo-List/blob/e94a93b3b7173d31dd0e39dfa43522d4e72c18f8/Details%20creen.png" width="250">
   </p>
 <br>
 
