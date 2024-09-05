@@ -2,35 +2,59 @@
 //  TodoListPresenterMock.swift
 //  Viper Todo ListTests
 //
-//  Created by rColeJnr on 04/09/24.
+//  Created by rColeJnr on 05/09/24.
 //
 
 import Foundation
 @testable import Viper_Todo_List
 
-class TodoListPresenterMock: TodoListInteractorResponseProtocol {
+class TodoListPresenterMock: TodoListPresenterProtocol {
+    var view: (any Viper_Todo_List.TodoListViewProtocol)? = TodoListViewMock()
     
-    var didDidGetCompletedTodos = false
-    func didGetCompletedTodos(_ todos: [Viper_Todo_List.Todo]) {
-        if !todos.isEmpty {
-            didDidGetCompletedTodos = true
-        }
+    var interactor: (any Viper_Todo_List.TodoListInteractorProtocol)? = TodoListInteractorMock()
+    
+    var router: (any Viper_Todo_List.TodoListRouterProtocol)? = TodoListRouterMock()
+    
+    
+    func viewDidLoad() {
+        view?.showInProgressTodosLoading()
+        view?.showCompletedTodosLoading()
+        interactor?.getInProgressTodos()
+        interactor?.getCompletedTodos()
     }
     
-    var didDidGetInProgressTodos = false
-    func didGeInProgressTodos(_ todos: [Viper_Todo_List.Todo]) {
-        if !todos.isEmpty {
-            didDidGetInProgressTodos = true
-        }
+    func getInProgressTodos() {
+        view?.showInProgressTodosLoading()
+        interactor?.getInProgressTodos()
     }
     
-    var didOnError = false
-    func onError(_ error: any Error) {
-        if error is VtlError {
-            didOnError = true
-        }
+    func createTodoCreateModule(from view: any Viper_Todo_List.TodoListViewProtocol) {
+        router?.createTodoCreateModule(from: view, animated: false)
     }
     
+    func showTodoDetails(from view: any Viper_Todo_List.TodoListViewProtocol, for todo: Viper_Todo_List.Todo) {
+        router?.createTodoDetailsViewController(from: view, animated: false, for: todo)
+    }
+    
+    
+}
 
+extension TodoListPresenterMock: TodoListInteractorResponseProtocol {
+    
+    func didGetCompletedTodos(_ todos: [Viper_Todo_List.Todo]) {
+        view?.hideCompletedTodosLoading()
+        view?.showCompletedTodos(with: todos)
+    }
+    
+    func didGeInProgressTodos(_ todos: [Viper_Todo_List.Todo]) {
+        view?.hideInProgressTodosLoading()
+        view?.showInProgressTodos(with: todos)
+    }
+    
+    func onError(_ error: any Error) {
+        view?.hideCompletedTodosLoading()
+        view?.hideInProgressTodosLoading()
+        view?.showError(error: VtlError.CouldNotSaveObject)
+    }
     
 }

@@ -272,6 +272,30 @@ extension TodoListViewController: TodoListViewProtocol {
         errorView = [1]
         todoListView.collectionView?.reloadData()
     }
+    
+    #if DEBUG
+    func getErrorViewIsEmpty() -> Bool {
+        return errorView.isEmpty
+    }
+    func getLoadingViewIsEmpty() -> Bool {
+        return loadingView.isEmpty
+    }
+    func getEmptyInProgressIsEmpty() -> Bool {
+        return emptyInProgress.isEmpty
+    }
+    func getEmptyCompletedIsEmpty() -> Bool {
+        return emptyCompleted.isEmpty
+    }
+    func getTodoInProgressListIsEmpty() -> Bool {
+        return todoInprogressList.isEmpty
+    }
+    func getTodoCompletedListIsEmpty() -> Bool {
+        return todoCompletedList.isEmpty
+    }
+    func getListView() -> TodoListView {
+        return todoListView.self
+    }
+    #endif
 }
 
 // MARK: VIEW DELEGATE

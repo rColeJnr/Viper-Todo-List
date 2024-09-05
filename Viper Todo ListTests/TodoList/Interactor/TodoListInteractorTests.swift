@@ -11,13 +11,13 @@ import XCTest
 final class TodoListInteractorTests: XCTestCase {
 
     var sut: TodoListInteractor!
-    var presenterMock: TodoListPresenterMock!
+    var presenterMock: TodoListInteractorPresenterMock!
     var localManagerMock: TodoListLocalDataManagerMock!
     var remoteManagerMock: TodoListRemoteDataManagerMock!
     override func setUpWithError() throws {
         localManagerMock = TodoListLocalDataManagerMock()
         remoteManagerMock = TodoListRemoteDataManagerMock()
-        presenterMock = TodoListPresenterMock()
+        presenterMock = TodoListInteractorPresenterMock()
         sut = TodoListInteractor()
         sut.presenter = presenterMock
         sut.localDataManager = localManagerMock
@@ -56,6 +56,4 @@ final class TodoListInteractorTests: XCTestCase {
         sut.onError(VtlError.InvalidJsonData)
         XCTAssertTrue(presenterMock.didOnError)
     }
-    
-
 }

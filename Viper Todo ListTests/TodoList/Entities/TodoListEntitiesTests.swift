@@ -20,6 +20,10 @@ final class TodoListEntitiesTests: XCTestCase {
         sut = nil
     }
 
+    func test_todoListSectionTypeCount() {
+        XCTAssertEqual(TodoListSectionType.allCases.count, 9)
+    }
+    
     func test_todoListSectionTypeOrder() {
         XCTAssertEqual(sut[0], .LoadingView)
         XCTAssertEqual(sut[1], .ErrorView)

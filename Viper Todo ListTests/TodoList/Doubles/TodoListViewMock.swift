@@ -47,6 +47,7 @@ class TodoListViewMock: TodoListViewProtocol {
     
     var isShowError = false
     func showError(error: any Error) {
+        print("fdjkfd")
         if error is VtlError {
             isShowError = true
         }
