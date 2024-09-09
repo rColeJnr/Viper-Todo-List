@@ -10,7 +10,7 @@ import UIKit
 class TodoCompleteRowViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoCompleteRowViewCell"
-    public var delegate: NavigateToShowAllViewCellDelegate?
+    public var delegate: TodoInProgressRowViewCellDelegate?
     
     private let title: UILabel = {
         let view = UILabel()

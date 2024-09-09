@@ -67,15 +67,6 @@ class TodoCreateView: UIView {
         return view
     }()
     
-    internal let selectedDate = {
-        let view = UILabel()
-        view.textColor = .label
-        view.font = .systemFont(ofSize: 24, weight: .thin)
-        view.textAlignment = .left
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     internal let datePickerView = {
         let view = UIDatePicker()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +82,20 @@ class TodoCreateView: UIView {
         viewConfig.cornerStyle = .medium
         viewConfig.baseBackgroundColor = .systemBlue
         viewConfig.baseForegroundColor = .white
+        let view = UIButton(configuration: viewConfig)
+        view.isUserInteractionEnabled = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    internal let priorityBtn = {
+        var viewConfig = UIButton.Configuration.plain()
+        viewConfig.title = "Mark as priority"
+        viewConfig.cornerStyle = .medium
+        viewConfig.baseForegroundColor = .systemBlue
+        viewConfig.image = UIImage(systemName: "checkmark.circle")
+        viewConfig.imagePlacement = .trailing
+        viewConfig.imagePadding = 10
         let view = UIButton(configuration: viewConfig)
         view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -114,9 +119,9 @@ class TodoCreateView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .systemBackground
-        configDatePicker()
         createBtn.addTarget(self, action: #selector(createBtnTarget), for: .touchUpInside)
-        addSubviews(errorView, nameLabel, name, descriptionLabel, descriptionTF, datePickerView, dateCreated, selectedDate, createBtn)
+        priorityBtn.addTarget(self, action: #selector(priorityBtnTarget), for: .touchUpInside)
+        addSubviews(errorView, nameLabel, name, descriptionLabel, descriptionTF, datePickerView, dateCreated, priorityBtn, createBtn)
         addConstraints()
     }
     
@@ -138,19 +143,17 @@ class TodoCreateView: UIView {
             return
         }
         
-        let todo = TodoModel(name: name.text, details: descriptionTF.text, completed: false, dateCreated: datePickerView.date)
+        let todo = TodoModel(name: name.text, details: descriptionTF.text, completed: false, priority: isPriority, dateCreated: datePickerView.date)
         self.delegate?.createNewTodo(for: todo)
     }
     
-    @objc private func configDatePicker() {
-        datePickerView.addTarget(self, action: #selector(setDate), for: .valueChanged)
-        selectedDate.text = datePickerView.date.formatted(date: .abbreviated, time: .omitted)
+    private var isPriority: Bool = false
+    @objc private func priorityBtnTarget(_ sender: UIButton) {
+        isPriority = true
+        priorityBtn.configuration?.image = UIImage(systemName: "checkmark.circle.fill")
+        priorityBtn.isUserInteractionEnabled = false
     }
-    
-    @objc private func setDate(_ sender: UIDatePicker) {
-        selectedDate.text = VtlDateFormatter.shared.dateFormatter(from: sender.date)
-    }
-    
+
     private func addConstraints() {
         NSLayoutConstraint.activate([
             
@@ -174,22 +177,24 @@ class TodoCreateView: UIView {
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 8),
             
-            descriptionTF.heightAnchor.constraint(equalToConstant: 280),
+            descriptionTF.heightAnchor.constraint(equalToConstant: 240),
             descriptionTF.bottomAnchor.constraint(equalTo: datePickerView.topAnchor, constant: -10),
             descriptionTF.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             descriptionTF.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
-            datePickerView.bottomAnchor.constraint(equalTo: dateCreated.topAnchor, constant: -10),
-            datePickerView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
-            dateCreated.bottomAnchor.constraint(equalTo: createBtn.topAnchor, constant: -25),
+            dateCreated.bottomAnchor.constraint(equalTo: datePickerView.bottomAnchor),
+            dateCreated.topAnchor.constraint(equalTo: datePickerView.topAnchor),
             dateCreated.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             dateCreated.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.37),
             
-            selectedDate.bottomAnchor.constraint(equalTo: createBtn.topAnchor, constant: -25),
-            selectedDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            selectedDate.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.60),
+            datePickerView.bottomAnchor.constraint(equalTo: priorityBtn.topAnchor, constant: -25),
+            datePickerView.leadingAnchor.constraint(equalTo: dateCreated.trailingAnchor, constant: 10),
           
+            priorityBtn.heightAnchor.constraint(equalToConstant: 40),
+            priorityBtn.bottomAnchor.constraint(equalTo: createBtn.topAnchor, constant: -5),
+            priorityBtn.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            priorityBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
             createBtn.heightAnchor.constraint(equalToConstant: 80),
             createBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
             createBtn.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),

@@ -27,6 +27,7 @@ class TodoCreateLocalDataManager: TodoCreateLocalDataManagerProtocol {
             newTodo.setValue(todo.name, forKey: "name")
             newTodo.setValue(todo.details, forKey: "details")
             newTodo.setValue(todo.completed, forKey: "completed")
+            newTodo.setValue(todo.priority, forKey: "priority")
             newTodo.setValue(todo.dateCreated, forKey: "dateCreated")
             newTodo.setValue(todo.dateCompleted, forKey: "dateCompleted")
         }

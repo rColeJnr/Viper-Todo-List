@@ -11,13 +11,15 @@ struct TodoModel: Equatable {
     let name: String
     let details: String
     let completed: Bool
+    let priority: Bool
     let dateCreated: Date
     var dateCompleted: Date?
     
-    init(name: String, details: String, completed: Bool, dateCreated: Date, dateCompleted: Date? = nil) {
+    init(name: String, details: String, completed: Bool, priority: Bool, dateCreated: Date, dateCompleted: Date? = nil) {
         self.name = name
         self.details = details
         self.completed = completed
+        self.priority = priority
         self.dateCreated = dateCreated
         self.dateCompleted = dateCompleted
     }

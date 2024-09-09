@@ -7,7 +7,8 @@
 
 import UIKit
 
-protocol NavigateToShowAllViewCellDelegate: AnyObject {
+protocol TodoInProgressRowViewCellDelegate: AnyObject {
+    func inProgressSortedBy(_ order: String)
     func navigateToShowAll(_ title: String, completed flag: Bool)
 }
 
@@ -301,7 +302,7 @@ extension TodoListViewController: TodoListViewProtocol {
 }
 
 // MARK: VIEW DELEGATE
-extension TodoListViewController: NavigateToShowAllViewCellDelegate, TodoCreateNewViewCellDelegate, TodoCreateViewToTodoListViewDelegate, TodoDetailsViewToTodoListViewDelegate, TodoErrorViewCellDelegate {
+extension TodoListViewController: TodoInProgressRowViewCellDelegate, TodoCreateNewViewCellDelegate, TodoCreateViewToTodoListViewDelegate, TodoDetailsViewToTodoListViewDelegate, TodoErrorViewCellDelegate {
     
     func retry() {
         presenter?.viewDidLoad()
@@ -321,6 +322,10 @@ extension TodoListViewController: NavigateToShowAllViewCellDelegate, TodoCreateN
     
     func createNewTodo() {
         presenter?.router?.createTodoCreateModule(from: self, animated: true)
+    }
+    
+    func inProgressSortedBy(_ order: String) {
+        // TODO
     }
     
     func navigateToShowAll(_ title: String, completed flag: Bool) {

@@ -19,6 +19,7 @@ extension Todo {
     @NSManaged public var name: String?
     @NSManaged public var details: String?
     @NSManaged public var completed: Bool
+    @NSManaged public var priority: Bool
     @NSManaged public var dateCreated: Date?
     @NSManaged public var dateCompleted: Date?
 
