@@ -37,6 +37,7 @@ class TodoListViewController: UIViewController {
     private var todoInprogressList: [Todo] = []
     private var todoCompletedList: [Todo] = []
     private var errorView: [Int] = []
+    private var errorMsg: String? = nil
     private var loadingView: [Int] = [1]
     private var emptyInProgress: [Int] = [1]
     private var emptyCompleted: [Int] = [1]
@@ -176,6 +177,7 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
                 fatalError()
             }
             cell.delegate = self
+            cell.setErrorMsg(for: errorMsg)
             return cell
         }
         
@@ -216,7 +218,6 @@ extension TodoListViewController: UICollectionViewDelegate, UICollectionViewData
 // MARK: - VIEW PROTOCOL
 extension TodoListViewController: TodoListViewProtocol {
     func showInProgressTodos(with todos: [Todo]) {
-        errorView = []
         todoInprogressList = todos
         if todoInprogressList.isEmpty {
             emptyInProgress = [1]
@@ -242,7 +243,6 @@ extension TodoListViewController: TodoListViewProtocol {
     }
     
     func showCompletedTodos(with todos: [Todo]) {
-        errorView = []
         todoCompletedList = todos
         if todoCompletedList.isEmpty {
             emptyCompleted = [1]
@@ -267,9 +267,11 @@ extension TodoListViewController: TodoListViewProtocol {
         })
     }
     
-    func showError(error: any Error) {
+    func showError(error: Error) {
         print("failed to load with error: \(error.localizedDescription)")
         errorView = [1]
+        loadingView = [0]
+        errorMsg = error.localizedDescription
         todoListView.collectionView?.reloadData()
     }
     

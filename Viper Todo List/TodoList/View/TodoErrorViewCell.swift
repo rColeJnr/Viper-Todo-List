@@ -20,14 +20,12 @@ class TodoErrorViewCell: UICollectionViewCell {
     
     private let errorLabel: UILabel = {
         let view = UILabel()
-        view.text = "Something went wrong!"
         view.adjustsFontForContentSizeCategory = true
         view.isUserInteractionEnabled = false
-        view.font = .systemFont(ofSize: 20, weight: .medium)
         view.textColor = .systemRed
         view.textAlignment = .center
-        view.adjustsFontSizeToFitWidth = true
-        view.numberOfLines = .max
+        view.font = .systemFont(ofSize: 20, weight: .medium)
+        view.numberOfLines = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -62,10 +60,14 @@ class TodoErrorViewCell: UICollectionViewCell {
     @objc private func retry() {
         delegate?.retry()
     }
+    
+    func setErrorMsg(for msg: String?) {
+        errorLabel.text = msg ?? "Something went wrong!"
+    }
 
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            errorLabel.bottomAnchor.constraint(equalTo: button.topAnchor),
+            errorLabel.heightAnchor.constraint(equalToConstant: 60),
             errorLabel.topAnchor.constraint(equalTo: topAnchor),
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
