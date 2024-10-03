@@ -11,7 +11,7 @@ protocol TodoCreateNewViewCellDelegate {
     func createNewTodo()
 }
 
-class TodoCreateNewViewCell: UICollectionViewCell {
+final class TodoCreateNewViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoCreateNewViewCell"
     var delegate: TodoCreateNewViewCellDelegate?

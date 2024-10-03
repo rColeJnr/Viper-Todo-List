@@ -11,7 +11,7 @@ protocol FirstOnboardingViewCellDelegate {
     func showSecondOnboardingView()
 }
 
-class FirstOnboardingViewCell: UICollectionViewCell {
+final class FirstOnboardingViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "FirstOnboardingViewCell"
     var delegate: FirstOnboardingViewCellDelegate?

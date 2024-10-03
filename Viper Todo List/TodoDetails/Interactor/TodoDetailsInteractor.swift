@@ -19,7 +19,7 @@ protocol TodoDetailsInteractorResponseProtocol {
     func didUpdateTodo()
 }
 
-class TodoDetailsInteractor: TodoDetailsInteractorProtocol {
+final class TodoDetailsInteractor: TodoDetailsInteractorProtocol {
     var presenter: TodoDetailsInteractorResponseProtocol?
     var dataManager: TodoDetailsLocalDataManagerProtocol?
     

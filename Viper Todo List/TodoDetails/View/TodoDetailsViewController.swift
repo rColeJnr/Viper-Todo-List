@@ -21,7 +21,7 @@ protocol TodoDetailsViewToTodoListViewDelegate {
     func didDeleteTodo()
 }
 
-class TodoDetailsViewController: UIViewController {
+final class TodoDetailsViewController: UIViewController {
     
     let detailsView = TodoDetailsView()
     var presenter: TodoDetailsPresenterProtocol?

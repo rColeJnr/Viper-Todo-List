@@ -17,7 +17,7 @@ protocol TodoCreateViewToTodoListViewDelegate {
     func updateInProgressList()
 }
 
-class TodoCreateViewController: UIViewController {
+final class TodoCreateViewController: UIViewController {
     
     var presenter: TodoCreatePresenterProtocol?
     var delegate: TodoCreateViewToTodoListViewDelegate?

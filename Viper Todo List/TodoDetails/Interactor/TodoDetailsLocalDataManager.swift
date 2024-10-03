@@ -20,7 +20,7 @@ protocol TodoDetailsLocalDataManagerResponseProtocol {
     func didUpdateTodo()
 }
 
-class TodoDetailsLocalDataManager: TodoDetailsLocalDataManagerProtocol {
+final class TodoDetailsLocalDataManager: TodoDetailsLocalDataManagerProtocol {
     var responseHandler: TodoDetailsLocalDataManagerResponseProtocol?
     
     func deleteTodo(todo: Todo) {

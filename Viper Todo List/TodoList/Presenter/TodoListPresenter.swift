@@ -19,7 +19,7 @@ protocol TodoListPresenterProtocol: AnyObject {
     func showTodoDetails(from view: TodoListViewProtocol, for todo: Todo)
 }
 
-class TodoListPresenter: TodoListPresenterProtocol {
+final class TodoListPresenter: TodoListPresenterProtocol {
     weak var view: TodoListViewProtocol?
     var interactor: TodoListInteractorProtocol?
     var router: TodoListRouterProtocol?

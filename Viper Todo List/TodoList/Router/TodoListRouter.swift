@@ -16,7 +16,7 @@ protocol TodoListRouterProtocol: AnyObject {
     func createModule() -> UINavigationController
     
 }
-class TodoListRouter: TodoListRouterProtocol {
+final class TodoListRouter: TodoListRouterProtocol {
     
     func createTodoCreateModule(from view: any TodoListViewProtocol, animated: Bool) {
         let createVc = TodoCreateRouter().createModule()

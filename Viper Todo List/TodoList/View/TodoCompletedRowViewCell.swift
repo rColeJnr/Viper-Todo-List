@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoCompleteRowViewCell: UICollectionViewCell {
+final class TodoCompleteRowViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoCompleteRowViewCell"
     public var delegate: TodoInProgressRowViewCellDelegate?

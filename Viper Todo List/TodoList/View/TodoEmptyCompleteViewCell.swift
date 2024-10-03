@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoEmptyCompleteViewCell: UICollectionViewCell {
+final class TodoEmptyCompleteViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoEmptyCompleteViewCell"
     

@@ -14,7 +14,7 @@ protocol TodoShowAllViewProtocol: AnyObject {
     func showTodoList(for list: [Todo])
 }
 
-class TodoShowAllViewController: UIViewController, TodoShowAllViewDelegate, TodoShowAllViewProtocol {
+final class TodoShowAllViewController: UIViewController, TodoShowAllViewDelegate, TodoShowAllViewProtocol {
     
     var presenter: TodoShowAllPresenterProtocol?
     

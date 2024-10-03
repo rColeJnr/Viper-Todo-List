@@ -12,7 +12,7 @@ protocol TodoDetailsViewDelegate {
     func deleteTodo(todo: Todo)
 }
 
-class TodoDetailsView: UIView {
+final class TodoDetailsView: UIView {
     
     // MARK: - VIEWS
     private let nameLabel = {

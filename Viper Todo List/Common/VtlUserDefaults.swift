@@ -8,7 +8,7 @@
 import Foundation
 
 /// Use UserDefaults to store in preferences whether this is first run
-class VtlUserDefaults {
+final class VtlUserDefaults {
     static let shared = VtlUserDefaults()
     
     func isNewUser() -> Bool {

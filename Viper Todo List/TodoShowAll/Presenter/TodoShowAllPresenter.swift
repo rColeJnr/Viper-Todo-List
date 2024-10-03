@@ -16,7 +16,7 @@ protocol TodoShowAllPresenterProtocol {
     func viewDidLoad()
 }
 
-class TodoShowAllPresenter: TodoShowAllPresenterProtocol {
+final class TodoShowAllPresenter: TodoShowAllPresenterProtocol {
     
     weak var view: TodoShowAllViewProtocol?
     var router: TodoShowAllRouterProtocol?

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoLoadingViewCell: UICollectionViewCell {
+final class TodoLoadingViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoLoadingViewCell"
     

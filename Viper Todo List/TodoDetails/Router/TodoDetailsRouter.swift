@@ -12,7 +12,7 @@ protocol TodoDetailsRouterProtocol: AnyObject {
     
 }
 
-class TodoDetailsRouter: TodoDetailsRouterProtocol {
+final class TodoDetailsRouter: TodoDetailsRouterProtocol {
     
     func createModule(for todo: Todo) -> TodoDetailsViewController {
         let view = TodoDetailsViewController()

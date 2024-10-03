@@ -18,7 +18,7 @@ protocol TodoDetailsPresenterProtocol: AnyObject {
     func updateTodo(todo: Todo)
 }
 
-class TodoDetailsPresenter: TodoDetailsPresenterProtocol {
+final class TodoDetailsPresenter: TodoDetailsPresenterProtocol {
 
     weak var view: TodoDetailsViewProtocol?
     var interactor: TodoDetailsInteractorProtocol?

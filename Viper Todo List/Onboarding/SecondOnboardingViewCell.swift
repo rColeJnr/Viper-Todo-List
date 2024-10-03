@@ -11,7 +11,7 @@ protocol SecondOnboardingViewCellDelegate {
     func navigateToHomeController()
 }
 
-class SecondOnboardingViewCell: UICollectionViewCell {
+final class SecondOnboardingViewCell: UICollectionViewCell {
     static let cellIdentifier = "SecondOnboardingViewCell"
     
     var delegate: SecondOnboardingViewCellDelegate?

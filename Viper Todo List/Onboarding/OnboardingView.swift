@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingView: UIView {
+final class OnboardingView: UIView {
     
     var collectionView: UICollectionView?
     

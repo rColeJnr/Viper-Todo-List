@@ -22,7 +22,7 @@ protocol RemoteManagerResponseProtocol {
     func onError(_ error: Error)
 }
 
-class RemoteDataManager: RemoteManagerProtocol {
+final class RemoteDataManager: RemoteManagerProtocol {
     var remoteRequestHandler: RemoteManagerResponseProtocol?
     
     private let baseUrl = "https://dummyjson.com/todos"

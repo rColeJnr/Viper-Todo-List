@@ -31,7 +31,7 @@ protocol TodoListViewProtocol: AnyObject {
     func showError(error: Error)
 }
 // MARK: - VIEW
-class TodoListViewController: UIViewController {
+final class TodoListViewController: UIViewController {
 
     private let todoListView = TodoListView()
     var presenter: TodoListPresenterProtocol?

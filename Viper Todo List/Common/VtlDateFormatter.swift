@@ -7,7 +7,7 @@
 
 import Foundation
 
-class VtlDateFormatter {
+final class VtlDateFormatter {
     
     static let shared:  VtlDateFormatter = VtlDateFormatter()
     

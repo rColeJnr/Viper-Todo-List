@@ -12,7 +12,7 @@ protocol TodoShowAllRouterProtocol: AnyObject {
     func createModule(with title: String, for list: [Todo]) -> TodoShowAllViewController
 }
 
-class TodoShowAllRouter: TodoShowAllRouterProtocol {
+final class TodoShowAllRouter: TodoShowAllRouterProtocol {
     
     // Passing animated as Bool for testing
     func createTodoDetailsViewController(from view: TodoShowAllViewProtocol, animated: Bool = true, for todo: Todo) {

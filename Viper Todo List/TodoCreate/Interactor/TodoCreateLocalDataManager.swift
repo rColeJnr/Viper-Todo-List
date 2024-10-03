@@ -17,7 +17,7 @@ protocol TodoCreateLocalDataManagerResponseProtocol {
     func didCreateTodo()
 }
 
-class TodoCreateLocalDataManager: TodoCreateLocalDataManagerProtocol {
+final class TodoCreateLocalDataManager: TodoCreateLocalDataManagerProtocol {
     
     var responseHandler: TodoCreateLocalDataManagerResponseProtocol?
     func createTodo(todo: TodoModel) throws {

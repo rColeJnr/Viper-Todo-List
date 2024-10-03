@@ -17,7 +17,7 @@ protocol TodoCreateInteractorResponseProtocol {
     func didCreateTodo()
 }
 
-class TodoCreateInteractor: TodoCreateInteractorProtocol {
+final class TodoCreateInteractor: TodoCreateInteractorProtocol {
     
     var presenter: TodoCreateInteractorResponseProtocol?
     var dataManager: TodoCreateLocalDataManagerProtocol?

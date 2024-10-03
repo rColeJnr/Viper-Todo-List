@@ -11,7 +11,7 @@ protocol TodoShowAllViewDelegate: AnyObject {
     func didSelectTodo(with todo: Todo)
 }
 
-class TodoShowAllView: UIView {
+final class TodoShowAllView: UIView {
     
     public weak var delegate: TodoShowAllViewDelegate?
     var todoList: [Todo] = []

@@ -25,7 +25,7 @@ protocol TodoListInteractorResponseProtocol {
 }
 
 // Here is were we going to check if first run
-class TodoListInteractor: TodoListInteractorProtocol {
+final class TodoListInteractor: TodoListInteractorProtocol {
     
     var presenter: TodoListInteractorResponseProtocol?
     var localDataManager: LocalDataManagerProtocol?

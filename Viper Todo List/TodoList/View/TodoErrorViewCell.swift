@@ -11,7 +11,7 @@ protocol TodoErrorViewCellDelegate {
     func retry()
 }
 
-class TodoErrorViewCell: UICollectionViewCell {
+final class TodoErrorViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TodoErrorViewCell"
     var delegate: TodoErrorViewCellDelegate?

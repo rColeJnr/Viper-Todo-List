@@ -13,7 +13,7 @@ protocol LocalDataManagerProtocol {
     func getInProgressTodos(completion: @escaping (VtlTodoResult) -> Void)
 }
 
-class LocalDataManager: LocalDataManagerProtocol {
+final class LocalDataManager: LocalDataManagerProtocol {
     
     func getInProgressTodos(completion: @escaping (VtlTodoResult) -> Void) {
         let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()

@@ -11,7 +11,7 @@ protocol TodoCreateViewDelegate {
     func createNewTodo(for todo: TodoModel)
 }
 
-class TodoCreateView: UIView {
+final class TodoCreateView: UIView {
     
     // MARK: - VIEWS
     private let nameLabel = {

@@ -14,7 +14,7 @@ protocol TodoCreatePresenterProtocol {
     func createTodo(todo: TodoModel)
 }
 
-class TodoCreatePresenter: TodoCreatePresenterProtocol {
+final class TodoCreatePresenter: TodoCreatePresenterProtocol {
    
     weak var view: TodoCreateViewProtocol?
     

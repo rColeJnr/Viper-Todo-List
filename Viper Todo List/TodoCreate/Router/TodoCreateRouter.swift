@@ -11,7 +11,7 @@ protocol TodoCreateRouterProtocol {
     func createModule() -> TodoCreateViewController
 }
 
-class TodoCreateRouter: TodoCreateRouterProtocol {
+final class TodoCreateRouter: TodoCreateRouterProtocol {
     
     func createModule() -> TodoCreateViewController {
         let view = TodoCreateViewController()

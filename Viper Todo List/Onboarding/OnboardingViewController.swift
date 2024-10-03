@@ -11,7 +11,7 @@ protocol NavigateToSecondOnboardingScreenDelegate: AnyObject {
     func navigateToSecondScreen()
 }
 
-class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController {
     
     private let onboardingView = OnboardingView()
     
